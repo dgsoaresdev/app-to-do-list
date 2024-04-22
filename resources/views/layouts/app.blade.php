@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title-page')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -18,66 +18,74 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- {{ $page_slug = 'dashboard' }} --}}
+
+    @if ( $page_slug != 'login' )
+
+            <!-- Plugin css -->
+            <link rel="stylesheet" href="{{ asset('assets/vendor/daterangepicker/daterangepicker.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}">
+
+            <!-- Theme Config Js -->
+            <script src="{{ asset('assets/js/hyper-config.js') }}"></script>
+
+            <!-- App css -->
+            <link href="{{ asset('assets/css/app-saas.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+
+            <!-- Icons css -->
+            <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+
+            @if ( $page_slug === 'administradoras' || $page_slug === 'administradoras-usuarios' || $page_slug === 'administradoras-details' )
+
+                <!-- Datatable css -->
+                <link href="{{ asset('assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+                <link href="{{ asset('assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
+
+            @endif
+
+            {{-- ADD ADMINISTRADOR --}}
+
+            <!-- Bootstrap Datepicker css -->
+            <link href="{{ asset('assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
+
+            <!-- Select2 Plugins css -->
+            <link href="{{ asset('assets/vendor/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+
+            <!-- SimpleMDE css -->
+            <link href="{{ asset('assets/vendor/simplemde/simplemde.min.css') }}" rel="stylesheet" type="text/css" />
+            <style>
+                .CodeMirror{
+                    min-height: 200px !important;
+                    max-height: 240px !important;
+                }
+            </style>
+
+
+
+        @elseif ( $page_slug === 'login' )
+            <!-- Theme Config Js -->
+            <script src="{{ asset('assets/js/hyper-config.js') }}"></script>
+
+            <!-- App css -->
+            <link href="{{ asset('assets/css/app-saas.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+
+            <!-- Icons css -->
+            <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+       
+        {{-- END HYPER --}}
+        @endif
+
+        {{-- TOASTR --}}
+        
+        <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-toastr/toastr.min.css') }}">
+        <script src="{{ asset('assets/vendor/jquery/jquery-3.7.1.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-toastr/toastr.min.js') }}"></script>
+
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        @yield('content')
     </div>
+     @include('layouts._partials.notifications')
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', function () {
+    return view('pagina', ['slug_page'=>'dashboard', 'page_slug'=>'dashboard'])->name('dashboard');
+});
+
+
+
+// Frefixo de rotas para a Administradoras
+Route::prefix('/tarefas')->group( function() 
+{
+    Route::get('/', function () {
+        return redirect('/tarefas/listagem');
+     });
+
+    Route::get('listagem/{view_mode?}', [App\Http\Controllers\TarefaController::class, 'store'])->name('tarefas.listagem');
+
+    Route::get('adicionar', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.adicionar');
+    Route::post('adicionar/create', [App\Http\Controllers\TarefaController::class, 'create'])->name('tarefas.adicionar.create');
+    Route::get('adicionar/create', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.adicionar.create');
+
+});
+
+ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
