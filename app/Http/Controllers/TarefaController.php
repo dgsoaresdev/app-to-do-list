@@ -34,12 +34,12 @@ class TarefaController extends Controller
      * @param  \App\Http\Requests\StoreTarefaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($view_mode = "")
+    public function store(Tarefa $tarefas, $view_mode = "")
     {
         //
         // $tarefa_store = $request->store();
 
-        $tarefa_store     = array();
+        $tarefa_store     = $tarefas->store();
         $statuses_tasks   = $this->statuses_tasks();
         $priorities_tasks = $this->priorities_tasks();
 
