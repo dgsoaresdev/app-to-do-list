@@ -20,10 +20,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- {{ $page_slug = 'dashboard' }} --}}
 
+    @php 
+    if ( isset( $page_slug ) || empty( $page_slug ) ) {
+        $page_slug = '';
+    }
+    @endphp
+
     @if ( $page_slug != 'login' )
 
             <!-- Plugin css -->
-            <link rel="stylesheet" href="{{ asset('assets/vendor/daterangepicker/daterangepicker.css') }}">
+            {{-- <link rel="stylesheet" href="{{ asset('assets/vendor/daterangepicker/daterangepicker.css') }}"> --}}
             <link rel="stylesheet" href="{{ asset('assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}">
 
             <!-- Theme Config Js -->
@@ -35,13 +41,13 @@
             <!-- Icons css -->
             <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
-            @if ( $page_slug === 'administradoras' || $page_slug === 'administradoras-usuarios' || $page_slug === 'administradoras-details' )
+            {{-- @if ( $page_slug === 'tarefas' ) --}}
 
                 <!-- Datatable css -->
                 <link href="{{ asset('assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
                 <link href="{{ asset('assets/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
 
-            @endif
+            {{-- @endif --}}
 
             {{-- ADD ADMINISTRADOR --}}
 
@@ -80,6 +86,25 @@
         <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-toastr/toastr.min.css') }}">
         <script src="{{ asset('assets/vendor/jquery/jquery-3.7.1.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/jquery-toastr/toastr.min.js') }}"></script>
+
+        {{-- DATEPICKER --}}
+
+        <!-- Daterangepicker css -->
+        {{-- <link href="{{ asset('assets/vendor/daterangepicker/daterangepicker.css') }}" rel="stylesheet" type="text/css" /> --}}
+        
+        <!-- Bootstrap Touchspin css -->
+        {{-- <link href="{{ asset('assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css') }}" rel="stylesheet" type="text/css" /> --}}
+
+        <!-- Bootstrap Datepicker css -->
+        {{-- <link href="{{ asset('assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" /> --}}
+
+        <!-- Bootstrap Timepicker css -->
+        {{-- <link href="{{ asset('assets/vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}" rel="stylesheet" type="text/css" /> --}}
+
+        {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> --}}
+        
+        <!-- Flatpickr Timepicker css -->
+        <link href="{{ asset('assets/vendor/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 
 </head>
 <body>

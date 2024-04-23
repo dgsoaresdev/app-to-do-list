@@ -26,7 +26,8 @@
                     <div class="card-body">
                         <div class="row mb-2 mb-sm-0">
                             <div class="col-sm-5">
-                                <a href="#" class="btn btn-primary mb-2 mb-sm-0"><i class="mdi mdi-plus-circle me-2"></i>Adicionar tarefa</a>
+                                <a class="btn btn-primary offCanvasButton" data-bs-toggle="offcanvas" href="{{ route('tarefas.adicionar') }}" data-bs-title="Adicionar tarefa" role="button" aria-controls="offcanvasRight" 
+            data-bs-toggle="offcanvasRight" data-bs-target="#offcanvasRight"><i class="mdi mdi-plus-circle me-2"></i>Adicionar tarefa</a>
                             </div>
                             <div class="col-sm-7">
                                 <div class="text-sm-end">
@@ -57,12 +58,6 @@
                                                 @foreach( $statuses_tasks as $status_key => $status_value )
                                                     <option value="{{ $status_key }}">{{ $status_value }}</option>
                                                 @endforeach
-                                                {{-- <option value="0">Não iniciada</option>
-                                                <option value="1">Em andamento</option>
-                                                <option value="2">Concluída</option>
-                                                <option value="3">Pausada</option>
-                                                <option value="4">Atrasada</option>
-                                                <option value="5">Suspensa</option> --}}
                                             </select>
                                         </div>
                                     </div>

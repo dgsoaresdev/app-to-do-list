@@ -714,7 +714,9 @@
 
         
 
-        @if( $page_slug === 'administradoras' || $page_slug === 'administradoras-usuarios' || $page_slug === 'administradoras-details' )
+        @if( $page_slug === 'tarefas' )
+
+       
 
             <!-- Datatable js -->
             <script src="{{ asset('assets/vendor/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -728,6 +730,50 @@
             <!-- Sellers Demo App js -->
             <script src="{{ asset('assets/js/pages/demo.sellers.js') }}"></script>
             <script src="{{ asset('assets/js/pages/demo.administradora.usuarios.js') }}"></script>
+
+            {{-- DATEPICKER --}}
+
+            
+
+            {{-- <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+
+            <!-- Code Highlight js -->
+            <script src="{{ asset('assets/vendor/highlightjs/highlight.pack.min.js') }}"></script>
+            <script src="{{ asset('assets/vendor/clipboard/clipboard.min.js') }}"></script>
+            <script src="{{ asset('assets/js/hyper-syntax.js') }}"></script> --}}
+
+          <!-- Daterangepicker Plugin js -->
+            {{-- <script src="{{ asset('assets/vendor/daterangepicker/moment.min.js') }}"></script> --}}
+            {{-- <script src="{{ asset('assets/vendor/daterangepicker/daterangepicker.js') }}"></script> --}}
+
+            <!-- Bootstrap Datepicker Plugin js -->
+            {{-- <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script> --}}
+
+            <!-- Bootstrap Timepicker Plugin js -->
+            {{-- <script src="{{ asset('assets/vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script> --}}
+
+            <!-- Input Mask Plugin js -->
+            {{-- <script src="{{ asset('assets/vendor/jquery-mask-plugin/jquery.mask.min.js') }}"></script> --}}
+
+            <!-- Bootstrap Touchspin Plugin js -->
+            {{-- <script src="{{ asset('assets/vendor/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script> --}}
+
+            <!-- Bootstrap Maxlength Plugin js -->
+            {{-- <script src="{{ asset('assets/vendor/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script> --}}
+
+            <!-- Typehead Plugin js -->
+            {{-- <script src="{{ asset('assets/vendor/handlebars/handlebars.min.js') }}"></script>
+            <script src="{{ asset('assets/vendor/typeahead.js/typeahead.bundle.min.js') }}"></script> --}}
+
+            <!-- Flatpickr Timepicker Plugin js -->
+            {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
+            <script src="{{ asset('assets/vendor/flatpickr/flatpickr.min.js') }}"></script>
+
+            <!-- Typehead Demo js -->
+            {{-- <script src="{{ asset('assets/js/pages/demo.typehead.js') }}"></script> --}}
+
+            <!-- Timepicker Demo js -->
+            {{-- <script src="{{ asset('assets/js/pages/demo.timepicker.js') }}"></script> --}}
 
             {{-- OFFCANVAS --}}
 
