@@ -41,9 +41,13 @@ Route::prefix('/tarefas')->group( function()
 
     Route::get('listagem/{view_mode?}', [App\Http\Controllers\TarefaController::class, 'store'])->name('tarefas.listagem');
 
-    Route::get('adicionar', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.adicionar');
+    Route::get('listagem', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.details'); // tarefas.details
+
+    Route::get('adicionar', [App\Http\Controllers\TarefaController::class, 'form_create'])->name('tarefas.adicionar');
     Route::post('adicionar/create', [App\Http\Controllers\TarefaController::class, 'create'])->name('tarefas.adicionar.create');
     Route::get('adicionar/create', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.adicionar.create');
+
+    Route::get('open/{id?}', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.open');
 
 });
 

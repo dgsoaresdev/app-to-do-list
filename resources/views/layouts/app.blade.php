@@ -26,6 +26,12 @@
     }
     @endphp
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    
+
     @if ( $page_slug != 'login' )
 
             <!-- Plugin css -->
@@ -42,6 +48,8 @@
             <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 
             {{-- @if ( $page_slug === 'tarefas' ) --}}
+
+            
 
                 <!-- Datatable css -->
                 <link href="{{ asset('assets/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />

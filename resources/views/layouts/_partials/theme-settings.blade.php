@@ -695,16 +695,12 @@
         <script src="{{ asset('assets/vendor/daterangepicker/moment.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/daterangepicker/daterangepicker.js') }}"></script>
 
-        <!-- Charts js -->
-        <script src="{{ asset('assets/vendor/chart.js/chart.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+        
 
         <!-- Vector Map js -->
         <script src="{{ asset('assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js') }}"></script>
 
-        <!-- Analytics Dashboard App js -->
-        <script src="{{ asset('assets/js/pages/demo.dashboard-analytics.js') }}"></script>
 
         <!-- App js -->
         <script src="{{ asset('assets/js/app.min.js') }}"></script>
@@ -712,7 +708,13 @@
 
         {{--  --}}
 
-        
+        @if( $page_slug === 'dashboard' )
+            <!-- Charts js -->
+            <script src="{{ asset('assets/vendor/chart.js/chart.min.js') }}"></script>
+            <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+            <!-- Analytics Dashboard App js -->
+            <script src="{{ asset('assets/js/pages/demo.dashboard-analytics.js') }}"></script>
+        @endif;
 
         @if( $page_slug === 'tarefas' )
 
@@ -844,15 +846,15 @@
         <script src="{{ asset('assets/vendor/select2/js/select2.min.js') }}"></script>
 
         <!-- Dropzone File Upload js -->
-        <script src="{{ asset('assets/vendor/dropzone/min/dropzone.min.js') }}"></script>
+        {{-- <script src="{{ asset('assets/vendor/dropzone/min/dropzone.min.js') }}"></script> --}}
 
         <!-- init js -->
-        <script src="{{ asset('assets/js/ui/component.fileupload.js') }}"></script>
+        {{-- <script src="{{ asset('assets/js/ui/component.fileupload.js') }}"></script> --}}
 
         <!-- SimpleMDE js -->
-        <script src="{{ asset('assets/vendor/simplemde/simplemde.min.js') }}"></script>
+        {{-- <script src="{{ asset('assets/vendor/simplemde/simplemde.min.js') }}"></script> --}}
         <!-- SimpleMDE demo -->
-        <script src="{{ asset('assets/js/pages/demo.simplemde.js') }}"></script>
+        {{-- <script src="{{ asset('assets/js/pages/demo.simplemde.js') }}"></script> --}}
 
         <script>
             $(document).ready(function() {
@@ -876,6 +878,8 @@
         <!-- demo js -->
         <script src="{{ asset('assets/js/ui/component.dragula.js') }}"></script>
 
+        
+
    
 
     {{-- TOASTR --}}
@@ -891,7 +895,9 @@
     {{-- <script>$.NotificationApp.send("", "Testando 5...", "top-right","rgba(0,0,0,0.2)","success");</script> --}}
     
     <script>
-
+        //======================
+        // EVENTS CANVAS
+         //======================
         $('.offCanvasButton').click(function(event){
             event.preventDefault();
 
@@ -921,6 +927,86 @@
             });
 
         }); 
+        //======================
+        // EVENTS MODAL
+        //======================
+
+        $('.ModalButton').click(function(event){
+            event.preventDefault();
+
+            var ContentHref = $(this).attr('href');
+            //var ContentID = $(this).attr('data-bs-target');
+            //var ContentTitle = $(this).attr('data-bs-title');
+
+            //console.log(ContentHref);
+
+            var url1 = ContentHref;
+
+            $.ajax({
+                url: url1,
+                type: 'GET',
+                data: {},
+                success: function(response) {
+
+                    var response_decode = jQuery.parseJSON( response );
+
+                    //================
+                    // Dates
+                    //================
+
+                    // Created
+                    var created_at = response_decode.created_at.split("T");
+                    var created_at_date = created_at[0].split("-");
+                    var created_at_date = created_at_date[2] + '/' + created_at_date[1] + '/' + created_at_date[0];
+                    var created_at_time = created_at[1].split(".")[0];
+                    var created_at_time = created_at_time.split(":");
+                    var created_at_time = created_at_time[0]+':'+created_at_time[1];
+
+                    // Start Task
+                    var start_datetime = response_decode.start_datetime.split(" ");
+                    var start_datetime_date = start_datetime[0].split("-");
+                    var start_datetime_date = start_datetime_date[2] + '/' + start_datetime_date[1] + '/' + start_datetime_date[0];
+                    var start_datetime_time = start_datetime[1].split(":");
+                    var start_datetime_time = start_datetime_time[0]+':'+start_datetime_time[1];
+
+                    // Deadline
+                    var deadline = response_decode.deadline.split(" ");
+                    var deadline_date = deadline[0].split("-");
+                    var deadline_date = deadline_date[2] + '/' + deadline_date[1] + '/' + deadline_date[0];
+                    var deadline_time = deadline[1].split(":");
+                    var deadline_time = deadline_time[0]+':'+deadline_time[1];
+
+                    //==================
+
+                    //alert( response_decode.priority_name ); //
+                    $('#task-detail-modal .modal-title').html(response_decode.name+'<span class="badge '+response_decode.priority_label+' ms-2">'+response_decode.priority_name+'</span>');
+                    $('#task-detail-modal #task-detail-modal-description').html(response_decode.description);
+                    $('#task-detail-modal .TaskModal-created_at').html(created_at_date+'<small class="text-muted ms-1">'+created_at_time+'</small>');
+                    $('#task-detail-modal .TaskModal-start_datetime').html(start_datetime_date+'<small class="text-muted ms-1">'+start_datetime_time+'</small>');
+                    $('#task-detail-modal .TaskModal-deadline').html(deadline_date+'<small class="text-muted ms-1">'+deadline_time+'</small>');
+                    //$('#task-detail-modal .TaskModal-owner-tooltip').html('<a class=d-inline-block data-bs-container=#tooltip-container data-bs-placement=top data-bs-toggle=tooltip href=javascript:void(0);  title="TESTE"><div class=avatar-sm><span class="avatar-title bg-secondary rounded-circle"><i class="mdi mdi-account"></i></span></div></a>');
+                    $('#task-detail-modal .TaskModal-owner').html(response_decode.owner_name);
+                    //$('#task-detail-modal .offcanvas-body').html(response);
+
+                   //$.NotificationApp.send("", result.message, "top-right","rgba(0,0,0,0.2)","success");
+
+                }
+            });
+
+        }); 
+
+            var ModalTask = document.getElementById('task-detail-modal')
+            ModalTask.addEventListener('hidden.bs.modal', function (event) {
+
+            $('#task-detail-modal .modal-title').html('Carregando...<span class="badge ms-2">Carregando...</span>');
+            $('#task-detail-modal #task-detail-modal-description').html();
+            $('#task-detail-modal .TaskModal-created_at').html('Carregando...<small class="text-muted ms-1"></small>');
+            $('#task-detail-modal .TaskModal-start_datetime').html('<small class="text-muted ms-1"></small>');
+            $('#task-detail-modal .TaskModal-deadline').html('<small class="text-muted ms-1"></small>');
+            $('#task-detail-modal #TaskModal-owner-tooltip').attr('title','Responsável');
+
+        })
+
 /*
         const myOffcanvas = document.getElementById('offcanvasExample')
         
