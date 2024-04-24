@@ -25,7 +25,7 @@
         </select>
     </div>
     <div class="mb-3">
-            <label for="owner_id" class="form-label">Status da tarefa</label>
+            <label for="status" class="form-label">Status da tarefa</label>
             <select class="form-control select2" name="status" id="status" data-toggle="select2">
                 <option disabled>Selecione</option>
 
@@ -62,12 +62,12 @@
 
     <div class="mb-3">
         <label class="form-label" for="start_datetime">Data de início</label>
-       <input class="form-control bg-white datepicker" data-date-format="Y-m-d G:iK" data-enable-time="true" placeholder="Dia e Hora">
+       <input class="form-control bg-white datepicker" id="start_datetime" name="start_datetime" data-date-format="Y-m-d H:i:s" data-enable-time="true" placeholder="Dia e Hora">
     </div>
     
     <div class="mb-3">
         <label class="form-label" for="deadline">Data de conclusão</label>
-        <input class="form-control bg-white datepicker" data-date-format="Y-m-d G:iK" data-enable-time="true" placeholder="Dia e Hora">
+        <input class="form-control bg-white datepicker" id="deadline" name="deadline" data-date-format="Y-m-d H:i:s" data-enable-time="true" placeholder="Dia e Hora">
     </div>
     
     <div class="mt-3 mb-3 mb-sm-0 text-right">

@@ -136,7 +136,67 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="board">
-                                    <div class="tasks" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three", "task-list-four"]'>
+                                 @foreach( $statuses_tasks as $status_key => $status_value )
+
+                                 <div class="tasks" @if( $status_key == 0 ) data-plugin="dragula" data-containers='{{ $statuses_tasks_values_in_line }}' @endif >
+                                        <h5 class="mt-0 task-header text-uppercase">{{ $status_value }} (3)</h5>
+                                        
+                                        <div id="status-{{ $status_key }}" class="task-list-items">
+
+                                            <!-- Task Item -->
+                                            @forelse ( $tarefa_store_by_status[$status_key] as $tarefa_store_by_status_key => $tarefa_store_by_status_value )
+                                                {{-- {{ $tarefa_store_by_status_value->name }} --}}
+                                                <div class="card mb-0">
+                                                <div class="card-body p-3">
+                                                    <small class="float-end text-muted">18 Jul 2018</small>
+                                                    <span class="badge bg-danger">High</span>
+
+                                                    <h5 class="mt-2 mb-2">
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#task-detail-modal" class="text-body">{{ $tarefa_store_by_status_value->name }}</a>
+                                                    </h5>
+
+                                                    <p class="mb-0">
+                                                        <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                                                            <i class="mdi mdi-briefcase-outline text-muted"></i>
+                                                            iOS
+                                                        </span>
+                                                        <span class="text-nowrap mb-2 d-inline-block">
+                                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                                                            <b>74</b> Comments
+                                                        </span>
+                                                    </p>
+
+                                                    <div class="dropdown float-end">
+                                                        <a href="#" class="dropdown-toggle text-muted arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-vertical font-18"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <!-- item-->
+                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Edit</a>
+                                                            <!-- item-->
+                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a>
+                                                            <!-- item-->
+                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-plus-circle-outline me-1"></i>Add People</a>
+                                                            <!-- item-->
+                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-exit-to-app me-1"></i>Leave</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <p class="mb-0">
+                                                        <img src="assets/images/users/avatar-2.jpg" alt="user-img" class="avatar-xs rounded-circle me-1" />
+                                                        <span class="align-middle">Robert Carlile</span>
+                                                    </p>
+                                                </div> <!-- end card-body -->
+                                            </div>
+                                            <!-- Task Item End -->
+                                            @empty
+                                               
+                                            @endforelse
+                                            
+                                        </div> <!-- end company-list-1-->
+                                    </div>
+                                 @endforeach
+                                    {{-- <div class="tasks" data-plugin="dragula" data-containers='["task-list-one", "task-list-two", "task-list-three", "task-list-four"]'>
                                         <h5 class="mt-0 task-header text-uppercase">Não iniciadas (3)</h5>
                                         
                                         <div id="task-list-one" class="task-list-items">
@@ -615,7 +675,7 @@
                                             <!-- Task Item End -->
                                             
                                         </div> <!-- end company-list-4-->
-                                    </div>
+                                    </div> --}}
 
                                 </div> <!-- end .board-->
                             </div> <!-- end col -->
