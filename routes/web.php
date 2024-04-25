@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\EmailsTarefas;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,6 +74,12 @@ Route::prefix('/tarefas')->group( function()
 
     Route::post('task_dragdrop_reorder', [App\Http\Controllers\TarefaController::class, 'task_dragdrop_reorder'])->name('tarefas.task_dragdrop_reorder');
 
+});
+
+Route::get('tarefas-emails', function(){
+    //return new EmailsTarefas();
+    Mail::to('dg@diogosoares.com.br')->send(new EmailsTarefas());
+    return 'Email enviado com sucesso!';
 });
 
  //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

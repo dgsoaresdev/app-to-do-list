@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeEmail extends Mailable
+class EmailsTarefas extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -26,10 +26,8 @@ class WelcomeEmail extends Mailable
      *
      * @return $this
      */
-    public function build($data="")
+    public function build()
     {
-        return $this->from('noreply@crmplataforma.com', 'Example')->to('noreply@crmplataforma.com', 'Example')->view('view.emails.welcome',['data'=>$data]);
+        return $this->markdown('emails.emails_tarefas');
     }
-
-    
 }

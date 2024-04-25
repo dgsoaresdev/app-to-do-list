@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarefa;
 use App\Mail\WelcomeEmail;
+use App\Mail\EmailsTarefas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -417,8 +418,10 @@ class TarefaController extends Controller
                 'body' => 'A Tarefa '.$tarefa->name.' foi atualizada.'
             );
 
-            $email = new WelcomeEmail;
-            $email->build($email_params);
+            $email_nofification = new EmailsTarefas();
+            $email_nofification = $email_nofification->build();
+
+            Mail::to('dg@diogosoares.com.br')->send( $email_nofification );
 
             
        
