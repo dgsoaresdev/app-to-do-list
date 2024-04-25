@@ -10,7 +10,7 @@
         
     <div class="mb-3">
         <label for="description" class="form-label">Descreva a tarefa</label>
-        <textarea id="description" name="description" class="form-control" rows="5">{{ old('description') ?  old('description') : (isset($tarefa->description) ? $tarefa->description : '') }}</textarea>
+        <textarea id="description" name="description" class="form-control" rows="3">{{ old('description') ?  old('description') : (isset($tarefa->description) ? $tarefa->description : '') }}</textarea>
     </div>
 
     <div class="mb-3">
@@ -89,8 +89,11 @@
         <input class="form-control bg-white datepicker" id="deadline" name="deadline" data-date-format="Y-m-d H:i:s" data-enable-time="true" placeholder="Dia e Hora" value="{{ old('name') ? old('name') : (isset( $tarefa->deadline) ? $tarefa->deadline : '') }}" required_modal>
     </div>
     
-    <div class="mt-3 mb-3 mb-sm-0 text-right">
+    <div class="mt-3 mb-3 mb-sm-0 text-right d-flex">
         <button type="submit" class="btn btn-primary">Salvar</button>
+        <div id="MsgFieldsRequireds" class="bg-warning ms-2 p-2 rounded d-none">
+            Por favor, preencha todos os campos obrigatórios.
+        </div>
     </div>
 
 </div> <!-- end col-->
@@ -111,19 +114,24 @@
     var requiredies = $(this).find('[required_modal]');
     var requiredies_empty = [];
 
-     requiredies.each(function () {  
-      // console.log( this.id );
-       if( $(this).val() < 1 ){
-        console.log(this.id);
-        requiredies_empty.push(this.id);
-        $(this).addClass('FieldRequiredAlert');
-       }
-     });
+        requiredies.each(function () {
+            $(this).removeClass('FieldRequiredAlert');  
+        // console.log( this.id );
+        if( $(this).val() < 1 ){
+            console.log(this.id);
+            requiredies_empty.push(this.id);
+            $(this).addClass('FieldRequiredAlert');
+        }
+        });
 
-    //console.log(requiredies);
+        //console.log(requiredies);
+        if( requiredies_empty.length > 0 ) {
+            $('#MsgFieldsRequireds').removeClass('d-none');
+            event.preventDefault();
+            return;
+        } 
+
     
-    event.preventDefault();
-    return;
   //}
   //alert("Values are correct!");
 

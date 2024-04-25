@@ -21,3 +21,6 @@ body.overlaySpinner .ContainerSpinner {
 .FieldRequiredAlert {
   border: 1px solid red !important;
 }
+.FieldRequiredAlert ~ span.select2 {
+  border: 1px solid red !important;
+}

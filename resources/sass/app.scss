@@ -30,4 +30,7 @@ body.overlaySpinner{
 
 .FieldRequiredAlert{
     border: 1px solid red !important;
+    & ~ span.select2{
+        border: 1px solid red !important;
+    }
 }
