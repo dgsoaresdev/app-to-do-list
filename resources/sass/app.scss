@@ -27,3 +27,7 @@ body.overlaySpinner{
         z-index: 99999999;
     }
 }
+
+.FieldRequiredAlert{
+    border: 1px solid red !important;
+}

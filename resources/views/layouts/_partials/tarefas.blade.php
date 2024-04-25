@@ -192,19 +192,19 @@
                                                 <div class="col-md-3">
                                                     <div class="mb-4">
                                                         <h5>Criado em:</h5>
-                                                        <p class="TaskModal-created_at">17 March 2018 <small class="text-muted">1:00 PM</small></p>
+                                                        <p class="TaskModal-created_at"><small class="text-muted"></small></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="mb-4">
                                                         <h5>Iniciar em:</h5>
-                                                        <p class="TaskModal-start_datetime">22 December 2018 <small class="text-muted">1:00 PM</small></p>
+                                                        <p class="TaskModal-start_datetime"><small class="text-muted"></small></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="mb-4">
                                                         <h5>Concluir em:</h5>
-                                                        <p class="TaskModal-deadline">22 December 2018 <small class="text-muted">1:00 PM</small></p>
+                                                        <p class="TaskModal-deadline"><small class="text-muted"></small></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
