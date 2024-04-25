@@ -22,6 +22,7 @@ class CreateTarefasTable extends Migration
             $table->integer('owner_id');
             $table->integer('status')->default('0');
             $table->integer('priority')->default('1');
+            $table->integer('order_in_card')->default('0');
             $table->dateTime('start_datetime')->nullable();
             $table->dateTime('deadline')->nullable();
             $table->timestamps();

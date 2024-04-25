@@ -49,6 +49,8 @@ Route::prefix('/tarefas')->group( function()
 
     Route::get('open/{id?}', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.open');
 
+    Route::post('dragtask', [App\Http\Controllers\TarefaController::class, 'dragtask'])->name('tarefas.dragtask');
+
 });
 
  Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

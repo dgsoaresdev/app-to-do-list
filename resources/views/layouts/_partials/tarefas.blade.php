@@ -137,17 +137,22 @@
                             <div class="col-12">
                                 <div class="board">
                                 
+                                @csrf
+                                <button onclick="sort()">SALVAR</button>
+
+                               
+                                
                                  @foreach( $statuses_tasks as $status_key => $status_value )
 
-                                 <div class="tasks" @if( $status_key == 0 ) data-plugin="dragula" data-containers='{{ $statuses_tasks_values_in_line }}' @endif >
+                                 <div class="tasks tasksDragular" @if( $status_key == 0 ) data-plugin="dragula" data-containers='{{ $statuses_tasks_values_in_line }}' @endif >
                                         <h5 class="mt-0 task-header text-uppercase">{{ $status_value }} (3)</h5>
                                         
-                                        <div id="status-{{ $status_key }}" class="task-list-items">
+                                        <div id="status-{{ $status_key }}" class="task-list-items draggable-item-" >
 
                                             <!-- Task Item -->
                                             @forelse ( $tarefa_store_by_status[$status_key] as $tarefa_store_by_status_key => $tarefa_store_by_status_value )
                                                 {{-- {{ $tarefa_store_by_status_value->name }} --}}
-                                                <div class="card mb-0">
+                                                <div id="{{ $tarefa_store_by_status_value->id }}" class="card mb-0 draggable-item" draggable="true">
                                                 <div class="card-body p-3">
                                                     <small class="float-end text-muted">{{ date('d/m/Y', strtotime($tarefa_store_by_status_value->created_at) ) }}</small>
                                                     <span class="badge {{ $arr_priorities[$tarefa_store_by_status_value->priority]['label'] }}">{{ $arr_priorities[$tarefa_store_by_status_value->priority]['name']}}</span>

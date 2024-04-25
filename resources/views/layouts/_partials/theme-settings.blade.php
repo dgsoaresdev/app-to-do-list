@@ -1006,87 +1006,81 @@
             $('#task-detail-modal #TaskModal-owner-tooltip').attr('title','Responsável');
 
         })
-
-/*
-        const myOffcanvas = document.getElementById('offcanvasExample')
         
-        myOffcanvas.addEventListener('show.bs.offcanvas', event => {
+   
+</script>
+
+
+
+<script type="text/javascript">
+
+
+//===============================================
+
+
+
+function sort() {
+
+    var _token = $('.board input[name="_token"]').val();
+    
+    var url_drag = "{{ route('tarefas.dragtask') }}";
+
+    var containerArray = ["status-0","status-1","status-2","status-3","status-4","status-5"];
+    var containerArray_multi = [];
+    var containerArray_multi_values = [];
+    var itemArray = [];
+    var itemJSON;
+    for(var i = 0; i < containerArray.length; i++) {
+
+
+        $('#'+containerArray[i]).each(function () {  
             
-            history.pushState(null, null, '#offcanvasExample');
-        })  
-        myOffcanvas.addEventListener('hide.bs.offcanvas', event => {
-            history.pushState(null, null, '#');
-            $('#offcanvasExample .offcanvas-body').html('<div class="ContainerSpinner d-flex justify-content-center align-items-center h-100 col-12"><div class="spinner-border avatar-md text-primary m-2" role="status"></div></div>');
-        })
+            if($(this).find('.draggable-item').length > 0) {
+                containerArray_multi_values[containerArray[i]] = [];
+            }
 
-        const el = '#offcanvasExample';
-        let bookmarksOffcanvasInstance = bootstrap.Offcanvas.getOrCreateInstance(el);
+            var draggable_items = $(this).find('.draggable-item');
+               
+            $(this).find('.draggable-item').each(function(index) {
 
-        if(location.hash === '#offcanvasExample'){
-            // open the sidebar
-            bookmarksOffcanvasInstance.show();
+                containerArray_multi_values[containerArray[i]].push(this.id);
 
-            var ContentHref = $('.page-aside-right').find('[data-bs-target="'+location.hash+'"]').attr('href');
-            console.log(ContentHref);
-
-            var url1 = ContentHref;
-
-            $.ajax({
-                url: url1,
-                type: 'GET',
-                data: {},
-                success: function(response) {
-                    
-                    setInterval(function () {
-                        $('#offcanvasExample .offcanvas-body').html(response);
-                    },500);
-
+                })
+                if($(this).find('.draggable-item').length > 0) {
+                    containerArray_multi[containerArray[i]] = containerArray_multi_values[containerArray[i]];
                 }
             });
-        } 
-*/
-
-//$.NotificationApp.send("", "Teste", "top-right","rgba(0,0,0,0.2)","success");
-
-
-//==============================================
-// TOASTR JS
-//==============================================
-/*
-!function ($) {
-    "use strict";
-
-    var NotificationApp = function () { };
-
-    NotificationApp.prototype.send = function (heading, body, position, loaderBgColor, icon, hideAfter, stack, showHideTransition) {
-        // default      
-        if (!hideAfter)
-            hideAfter = 3000;
-        if (!stack)
-            stack = 1;
-
-        var options = {
-            heading: heading,
-            text: body,
-            position: position,
-            loaderBg: loaderBgColor,
-            icon: icon,
-            hideAfter: hideAfter,
-            stack: stack
-        };
-
-        if (showHideTransition)
-            options.showHideTransition = showHideTransition;
-        else
-            options.showHideTransition = 'fade';
-
-        $.toast().reset('all');
-        $.toast(options);
+        
     }
 
-    $.NotificationApp = new NotificationApp, $.NotificationApp.Constructor = NotificationApp
+  
+    tasks_array_json = JSON.stringify(containerArray_multi);
 
-}(window.jQuery);
-*/
+    console.log(containerArray_multi);
 
-    </script>
+        
+    $.ajax({
+        url: url_drag,
+        type : 'POST',
+        data : {
+            _token: _token,
+            tasks_array: tasks_array_json
+            },
+        success: function(response)
+        {
+            console.log(response);
+        }
+           
+        });
+        
+    }
+</script>
+
+<script>
+
+
+//===========================
+
+
+
+</script>

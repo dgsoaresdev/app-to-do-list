@@ -236,6 +236,17 @@ class TarefaController extends Controller
         //
     }
 
+    public function dragtask()
+    {
+        $tasks_array = $_POST['tasks_array'];
+        $token       = $_POST['_token'];
+
+        //$tasks_array = json_decode$tasks_array
+
+        //
+        return $tasks_array;
+    }
+    
     /**
      * Update the specified resource in storage.
      *
