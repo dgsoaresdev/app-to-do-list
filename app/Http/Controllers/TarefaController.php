@@ -34,10 +34,40 @@ class TarefaController extends Controller
     public function form_create()
     {
 
+        $tarefa = new Tarefa;
+        $tarefa->name            = '';
+        $tarefa->description     = '';
+        $tarefa->owner_id        = '';
+        $tarefa->status          = '';
+        $tarefa->priority        = '';
+        $tarefa->start_datetime  = '';
+        $tarefa->deadline        = '';
+
         $users = $this->users();
         $statuses_tasks = $this->statuses_tasks();
         $priorities_tasks = $this->priorities_tasks();
-        return  view('layouts._partials.tarefas.tarefas-form', ['contact_details'=>array(), 'users' => $users, 'statuses_tasks'=>$statuses_tasks, 'priorities_tasks'=>$priorities_tasks]);
+        //$action_route = 'tarefas.adicionar.create';
+
+        $action_route = route('tarefas.adicionar.create');
+
+        return  view('layouts._partials.tarefas.tarefas-form', ['contact_details'=>array(), 'action_route'=>$action_route, 'tarefa'=>$tarefa, 'users' => $users, 'statuses_tasks'=>$statuses_tasks, 'priorities_tasks'=>$priorities_tasks]);
+    }
+
+    //{{ route('tarefas.editar.update', $tarefa->id) }}
+
+    public function form_edit($id_task="")
+    {
+        $tarefa = new Tarefa; 
+        $tarefa = $tarefa->store('tasks_by_id', $id_task)[0];
+
+        $users = $this->users();
+        $statuses_tasks = $this->statuses_tasks();
+        $priorities_tasks = $this->priorities_tasks();
+        //$action_route = 'tarefas.editar.update';
+
+        $action_route = route('tarefas.editar.update', $id_task);
+
+        return  view('layouts._partials.tarefas.tarefas-form', ['contact_details'=>array(), 'action_route'=>$action_route, 'tarefa'=>$tarefa, 'users' => $users, 'statuses_tasks'=>$statuses_tasks, 'priorities_tasks'=>$priorities_tasks]);
     }
 
     /**
@@ -80,6 +110,7 @@ class TarefaController extends Controller
             $tarefa = new Tarefa();
 
             $tarefa->name                   = $request->input('name');
+            $tarefa->description            = $request->input('description');
             $tarefa->project_id             = 1;
             $tarefa->user_id                = Auth::id();
             $tarefa->owner_id               = $request->input('owner_id');
@@ -294,9 +325,40 @@ class TarefaController extends Controller
      * @param  \App\Models\Tarefa  $tarefa
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTarefaRequest $request, Tarefa $tarefa)
+    public function update( Request $request, $id_task="")
     {
-        //
+            $tarefa = new Tarefa();
+            $tarefa = $tarefa->find($id_task);
+
+            $tarefa->name                   = $request->input('name');
+            $tarefa->description            = $request->input('description');
+            $tarefa->project_id             = 1;
+            $tarefa->user_id                = Auth::id();
+            $tarefa->owner_id               = $request->input('owner_id');
+            $tarefa->status                 = $request->input('status');
+            $tarefa->priority               = $request->input('priority');
+            $tarefa->start_datetime         = $request->input('start_datetime');
+            $tarefa->deadline               = $request->input('deadline');
+
+
+            $tarefa->save();
+           
+
+            if ( $tarefa ) {
+               
+                $type = 'success';
+                $msg = 'Tarefa atualizada com sucesso.';
+                $url_redirect = route('tarefas.listagem');
+            } else {
+                $type = 'error';
+                $msg = 'Algum erro ocorreu ao tentar atualziar a tarefa.';
+                $url_redirect = route('tarefas.listagem');
+            }
+       
+       
+        $this->notificationApp($type,$msg);
+        return redirect( $url_redirect );
+        
     }
 
     /**

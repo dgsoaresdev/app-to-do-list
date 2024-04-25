@@ -10,7 +10,7 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li class="breadcrumb-item active">Tarefas</li>
                             <li class="breadcrumb-item active">Listagem</li>
                         </ol>
@@ -140,7 +140,8 @@
                                                             <!-- item-->
                                                             <a href="{{ route('tarefas.open', $tarefa_store_by_status_value->id)}}" data-bs-toggle="modal" data-bs-target="#task-detail-modal" class="dropdown-item ModalButton"><i class="mdi mdi-eye me-1"></i>Abrir</a>
                                                             <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Editar</a>
+                                                            <a class="offCanvasButton dropdown-item" data-bs-toggle="offcanvas" href="{{ route('tarefas.editar',$tarefa_store_by_status_value->id) }}" data-bs-title="Editar tarefa" role="button" aria-controls="offcanvasRight" 
+            data-bs-toggle="offcanvasRight" data-bs-target="#offcanvasRight"><i class="mdi mdi-pencil me-1"></i>Editar</a>
                                                             <!-- item-->
                                                             <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Deletar</a>
                                                         </div>

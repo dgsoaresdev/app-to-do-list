@@ -14,11 +14,11 @@
         <!-- Start Page Content here -->
         <!-- ============================================================== -->
         <div class="content-page">
-            @if( $slug_page && $slug_page === 'tarefas'  )
-                    @include('layouts._partials.tarefas')
-                @else
-                    @include('layouts._partials.dashboard')
-                @endif
+            @if( $slug_page && $slug_page === 'tarefas' )
+                @include('layouts._partials.tarefas')
+            @else
+                @include('layouts._partials.dashboard')
+            @endif
             @include('layouts._partials.footer')
         </div>
         <!-- ============================================================== -->

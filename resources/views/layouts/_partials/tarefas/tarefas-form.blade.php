@@ -1,16 +1,16 @@
 <h5 class="font-18">Dados da tarefa</h5>
 <hr>
 <div class="col-xl-12">
-<form action="{{ route('tarefas.adicionar.create') }}" method="post" enctype="multipart/form-data">
+<form action="{{ $action_route }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="name" class="form-label">Nome da tarefa</label>
-        <input type="text" id="name" name="name" class="form-control" value="{{ old('name') ? old('name') : (isset( $contact_details['name']) ? $contact_details['name'] : '') }}" placeholder="Dê um nome à tarefa...">
+        <input type="text" id="name" name="name" class="form-control" value="{{ old('name') ? old('name') : (isset( $tarefa->name) ? $tarefa->name : '') }}" placeholder="Dê um nome à tarefa...">
     </div>
         
     <div class="mb-3">
         <label for="description" class="form-label">Descreva a tarefa</label>
-        <textarea id="description" name="description" class="form-control" rows="5">{{ old('description') ?  old('description') : (isset($contact_details['description']) ? $contact_details['description'] : '') }}</textarea>
+        <textarea id="description" name="description" class="form-control" rows="5">{{ old('description') ?  old('description') : (isset($tarefa->description) ? $tarefa->description : '') }}</textarea>
     </div>
 
     <div class="mb-3">
@@ -19,7 +19,12 @@
             <option disabled>Selecione</option>
             
             @foreach ( $users as $user )
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @if( $tarefa->owner_id && $tarefa->owner_id == $user->id )
+                    @php $selected = ' selected="selected" '; @endphp
+                @else
+                    @php $selected = ''; @endphp
+                @endif
+                    <option value="{{ $user->id }}" {{ $selected }}>{{ $user->name }}</option>
             @endforeach
             
         </select>
@@ -30,7 +35,14 @@
                 <option disabled>Selecione</option>
 
                 @foreach( $statuses_tasks as $status_key => $status_value )
-                    <option value="{{ $status_key }}">{{ $status_value }}</option>
+
+                    @if( $tarefa->status && $tarefa->status == $status_key )
+                        @php $selected = ' selected="selected" '; @endphp
+                    @else
+                        @php $selected = ''; @endphp
+                    @endif
+                    
+                    <option value="{{ $status_key }}" {{ $selected }}>{{ $status_value }}</option>
                 @endforeach
                 
                 {{-- @foreach ( $users as $user )
@@ -45,7 +57,14 @@
                 <option disabled>Selecione</option>
 
                 @foreach( $priorities_tasks as $priority_key => $priority_value )
-                    <option value="{{ $priority_key }}">{{ $priority_value }}</option>
+
+                    @if( $tarefa->priority && $tarefa->priority == $priority_key )
+                        @php $selected = ' selected="selected" '; @endphp
+                    @else
+                        @php $selected = ''; @endphp
+                    @endif
+
+                    <option value="{{ $priority_key }}" {{ $selected }}>{{ $priority_value }}</option>
                 @endforeach
                 
                 {{-- @foreach ( $users as $user )
@@ -62,12 +81,12 @@
 
     <div class="mb-3">
         <label class="form-label" for="start_datetime">Data de início</label>
-       <input class="form-control bg-white datepicker" id="start_datetime" name="start_datetime" data-date-format="Y-m-d H:i:s" data-enable-time="true" placeholder="Dia e Hora">
+       <input class="form-control bg-white datepicker" id="start_datetime" name="start_datetime" data-date-format="Y-m-d H:i:s" data-enable-time="true" placeholder="Dia e Hora" value="{{ old('name') ? old('name') : (isset( $tarefa->start_datetime) ? $tarefa->start_datetime : '') }}">
     </div>
     
     <div class="mb-3">
         <label class="form-label" for="deadline">Data de conclusão</label>
-        <input class="form-control bg-white datepicker" id="deadline" name="deadline" data-date-format="Y-m-d H:i:s" data-enable-time="true" placeholder="Dia e Hora">
+        <input class="form-control bg-white datepicker" id="deadline" name="deadline" data-date-format="Y-m-d H:i:s" data-enable-time="true" placeholder="Dia e Hora" value="{{ old('name') ? old('name') : (isset( $tarefa->deadline) ? $tarefa->deadline : '') }}">
     </div>
     
     <div class="mt-3 mb-3 mb-sm-0 text-right">

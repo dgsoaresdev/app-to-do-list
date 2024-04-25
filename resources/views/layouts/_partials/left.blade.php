@@ -46,24 +46,21 @@
 
                         <li class="side-nav-title">NAVEGUE</li>
                         <li class="side-nav-item">
-                            <a href="/home" class="side-nav-link">
+                            <a href="/dashboard" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
-                                <span>Dashboards </span>
+                                <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="side-nav-item {{ $slug_page === 'tarefas-details' ? 'menuitem-active' : '' }}">
+                        <li class="side-nav-item {{ $slug_page === 'tarefas' ? 'menuitem-active' : '' }}">
                             <a data-bs-toggle="collapse" href="#sidebarTarefas" aria-expanded="false" aria-controls="sidebarTarefas" class="side-nav-link">
                                 <i class="uil-store"></i>
                                 <span>Tarefas</span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <div class="collapse {{ $slug_page === 'tarefas-details' ? 'show' : '' }}" id="sidebarTarefas">
+                            <div class="collapse {{ $slug_page === 'tarefas' ? 'show' : '' }}" id="sidebarTarefas">
                                 <ul class="side-nav-second-level">
-                                    <li class="{{ $slug_page === 'tarefas-details' ? 'menuitem-active' : '' }}">
-                                        <a href="#">Tarefas</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Adicionar tarefa</a>
+                                    <li class="{{ $slug_page === 'tarefas' ? 'menuitem-active' : '' }}">
+                                        <a href="{{ route('tarefas.listagem') }}">Tarefas</a>
                                     </li>
                                 </ul>
                             </div>
