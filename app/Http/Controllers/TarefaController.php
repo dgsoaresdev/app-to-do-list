@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarefa;
+use App\Mail\WelcomeEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StoreTarefaRequest;
 use App\Http\Requests\UpdateTarefaRequest;
 
@@ -205,6 +207,59 @@ class TarefaController extends Controller
         return view('pagina', ['slug_page'=>'tarefas', 'page_slug'=>'tarefas', 'owners_tasks'=>$owners_tasks, 'statuses_tasks'=>$statuses_tasks, 'arr_priorities' => $arr_priorities, 'priorities_tasks' => $priorities_tasks, 'view_mode' => $view_mode, 'statuses_tasks_values_in_line' => $statuses_tasks_values_in_line, 'tarefa_store_by_status' => $tarefa_store_by_status]);
     }
 
+
+    public function search(Tarefa $tarefas, $keyword = "")
+    {
+        //
+        // $tarefa_store = $request->store();
+
+        $tarefa_store     = $tarefas->store();
+        $statuses_tasks   = $this->statuses_tasks();
+        $priorities_tasks = $this->priorities_tasks();
+        $owners_tasks     = $this->users();
+        // Build Arrays
+        // Status
+        $statuses_tasks_values_in_line = array();
+        $tarefa_store_by_status = array();
+        foreach($statuses_tasks as $statuses_key =>$statuses_value ){
+            $statuses_tasks_values_in_line[] = 'status_'.$statuses_key;
+
+            $tarefa_store_by_status[$statuses_key] = $tarefas->store('tasks_by_status_and_search','',$statuses_key, $keyword);
+
+        }
+        $statuses_tasks_values_in_line   = json_encode( $statuses_tasks_values_in_line );
+
+        // Prioroties
+        $arr_priorities = array();
+        
+        foreach( $priorities_tasks as $priorities_key => $priorities_value ){
+
+            $arr_priorities[$priorities_key]['name'] = $priorities_value;
+
+            switch($priorities_key){
+                
+                case 0 :
+                    $arr_priorities[$priorities_key]['label'] = 'bg-danger';
+                break;
+                case 1 :
+                    $arr_priorities[$priorities_key]['label'] = 'bg-warning text-black';
+                break;
+                case 2 :
+                    $arr_priorities[$priorities_key]['label'] = 'bg-primary';
+                break;
+            }
+
+        }
+
+        if ( !Auth::check() ){
+
+            return redirect( route('home') );
+        
+        }
+
+        return view('pagina', ['slug_page'=>'tarefas', 'page_slug'=>'tarefas', 'owners_tasks'=>$owners_tasks, 'statuses_tasks'=>$statuses_tasks, 'arr_priorities' => $arr_priorities, 'priorities_tasks' => $priorities_tasks, 'view_mode' => 'kanban', 'statuses_tasks_values_in_line' => $statuses_tasks_values_in_line, 'tarefa_store_by_status' => $tarefa_store_by_status]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -354,6 +409,18 @@ class TarefaController extends Controller
                 $msg = 'Algum erro ocorreu ao tentar atualziar a tarefa.';
                 $url_redirect = route('tarefas.listagem');
             }
+
+            $email_params = array(
+                'to'=> 'dg@diogosoares.com.br',
+                'to_name' => 'Nome e Sobrenome',
+                'subject' => 'Tarefa Atualizada',
+                'body' => 'A Tarefa '.$tarefa->name.' foi atualizada.'
+            );
+
+            $email = new WelcomeEmail;
+            $email->build($email_params);
+
+            
        
        
         $this->notificationApp($type,$msg);

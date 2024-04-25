@@ -1029,6 +1029,35 @@
            
         });
         */
+
+        // Search
+        //========================
+        // Desabilitando submit acitentais pela tecla "ENTER"
+        document.addEventListener("DOMContentLoaded", function() {
+
+            var form = document.getElementById("form_search_tasks");
+
+
+            form.addEventListener("keydown", function(event) {
+
+                    if (event.key === "Enter") {
+                    event.preventDefault(); // Prevent form submission
+                    }
+            });
+
+        });
+
+        // Redirecionamento do search
+        $("#form_search_tasks_submit").click(function(event){
+            event.preventDefault();
+
+            var task_keyword = $('#task_search').val();
+            
+            if( task_keyword.length > 2 ) {
+                window.location.href = "{{ route('tarefas.busca') }}/"+task_keyword;
+            }              
+
+        });
    
 </script>
 

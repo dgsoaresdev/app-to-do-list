@@ -10,7 +10,7 @@ class Tarefa extends Model
 {
     use HasFactory;
 
-    public function store( $type = "", $value = 0, $status="" )
+    public function store( $type = "", $value = 0, $status="", $keyword="" )
     {
         //$type = 'tasks_by_id';
 
@@ -19,6 +19,9 @@ class Tarefa extends Model
         }
         elseif ( $type == 'tasks_by_status' ) {
             $store = Tarefa::where('status', '=', $status)->orderBy('order_in_card', 'ASC')->get();
+        } 
+        elseif ( $type == 'tasks_by_status_and_search' ) {
+            $store = Tarefa::where('name', 'LIKE','%'.$keyword.'%')->where('status', '=', $status)->orderBy('order_in_card', 'ASC')->get();
         } 
         else {
             $store = Tarefa::orderBy('order_in_card', 'ASC')->get();

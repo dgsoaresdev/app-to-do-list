@@ -30,14 +30,23 @@
             data-bs-toggle="offcanvasRight" data-bs-target="#offcanvasRight"><i class="mdi mdi-plus-circle me-2"></i>Adicionar tarefa</a>
                             </div>
                             <div class="col-sm-7">
-                                <div class="text-sm-end">
+<div class="app-search dropdown d-none d-lg-block">
+                            <form id="form_search_tasks">
+                                <div class="input-group">
+                                    <input type="search" class="form-control dropdown-toggle" placeholder="Pesquisar tarefas..." id="task_search">
+                                    <span class="mdi mdi-magnify search-icon"></span>
+                                    <button id="form_search_tasks_submit" class="input-group-text btn btn-primary" type="button" >Buscar</button>
+                                </div>
+                            </form>
+                            </div>
+                                {{-- <div class="text-sm-end">
                                     <button type="button" class="btn btn-secondary mb-2 me-1 mb-sm-0"><i class="mdi mdi-cog"></i></button>
                                     <button type="button" class="btn btn-light mb-2 me-1 mb-sm-0">Importar</button>
                                     <button type="button" class="btn btn-light mb-2 mb-sm-0">Exportar</button>
-                                </div>
+                                </div> --}}
                             </div><!-- end col-->
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                                 <form method="GET" action="{{ route('tarefas.listagem') }}" class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between mt-0 mb-2">
                                     <div class="col-5 col-sm-5 col-md-4">
                                         <div class="d-flex align-items-center">
@@ -65,7 +74,7 @@
                                         <button type="submit" class="btn btn-secondary">Filtrar</button>
                                     </div>
                                 </form>
-                        </div>
+                        </div> --}}
                         @if( $view_mode && $view_mode === 'list')
                         <div class="table-responsive">
                             <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="products-datatable">
@@ -92,7 +101,7 @@
                             </table>
                         </div>
                         @else
-                        <div class="row">
+                        <div class="row mt-3">
                                 
                                 <div class="d-flex justify-content-center mb-3 mt-1">
                                     @csrf
@@ -172,7 +181,7 @@
                                  @endforeach
                                 </div> <!-- end .board-->
                             </div> <!-- end col -->
-                            <div class="d-flex justify-content-center mb-3 mt-1">       
+                            <div class="d-flex justify-content-center mb-3 mt-3">       
                                 <button class="btn btn-success" onclick="sort()">SALVAR ALTERAÇÕES</button>
                             </div>
                         </div>

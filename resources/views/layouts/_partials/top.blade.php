@@ -41,7 +41,7 @@
                         </button>
 
                         <!-- Topbar Search Form -->
-                        <div class="app-search dropdown d-none d-lg-block">
+                        {{-- <div class="app-search dropdown d-none d-lg-block">
                             <form>
                                 <div class="input-group">
                                     <input type="search" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
@@ -103,7 +103,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <ul class="topbar-menu d-flex align-items-center gap-3">
