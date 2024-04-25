@@ -53,7 +53,7 @@
                         </li>
                         <li class="side-nav-item {{ $slug_page === 'tarefas' ? 'menuitem-active' : '' }}">
                             <a data-bs-toggle="collapse" href="#sidebarTarefas" aria-expanded="false" aria-controls="sidebarTarefas" class="side-nav-link">
-                                <i class="uil-store"></i>
+                                <i class="uil-check-square"></i>
                                 <span>Tarefas</span>
                                 <span class="menu-arrow"></span>
                             </a>

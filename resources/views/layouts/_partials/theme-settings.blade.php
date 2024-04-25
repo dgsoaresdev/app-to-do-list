@@ -934,6 +934,11 @@
         $('.ModalButton').click(function(event){
             event.preventDefault();
 
+            
+
+            var data_bs_target = $(this).attr('data-bs-target');
+            //alert(data_bs_target);
+
             var ContentHref = $(this).attr('href');
             //var ContentID = $(this).attr('data-bs-target');
             //var ContentTitle = $(this).attr('data-bs-title');
@@ -948,7 +953,10 @@
                 data: {},
                 success: function(response) {
 
+                    
                     var response_decode = jQuery.parseJSON( response );
+                    
+                    if( data_bs_target === '#task-detail-modal' ) {
 
                     //================
                     // Dates
@@ -978,17 +986,25 @@
 
                     //==================
 
-                    //alert( response_decode.priority_name ); //
                     $('#task-detail-modal .modal-title').html(response_decode.name+'<span class="badge '+response_decode.priority_label+' ms-2">'+response_decode.priority_name+'</span>');
                     $('#task-detail-modal #task-detail-modal-description').html(response_decode.description);
                     $('#task-detail-modal .TaskModal-created_at').html(created_at_date+'<small class="text-muted ms-1">'+created_at_time+'</small>');
                     $('#task-detail-modal .TaskModal-start_datetime').html(start_datetime_date+'<small class="text-muted ms-1">'+start_datetime_time+'</small>');
                     $('#task-detail-modal .TaskModal-deadline').html(deadline_date+'<small class="text-muted ms-1">'+deadline_time+'</small>');
-                    //$('#task-detail-modal .TaskModal-owner-tooltip').html('<a class=d-inline-block data-bs-container=#tooltip-container data-bs-placement=top data-bs-toggle=tooltip href=javascript:void(0);  title="TESTE"><div class=avatar-sm><span class="avatar-title bg-secondary rounded-circle"><i class="mdi mdi-account"></i></span></div></a>');
-                    $('#task-detail-modal .TaskModal-owner').html(response_decode.owner_name);
-                    //$('#task-detail-modal .offcanvas-body').html(response);
-
+                    $('#task-detail-modal .TaskModal-owner').html(response_decode.owner_name);                
                    //$.NotificationApp.send("", result.message, "top-right","rgba(0,0,0,0.2)","success");
+                }
+
+                if( data_bs_target === '#danger-header-modal' ) {
+                    
+                    let response_decode_id = response_decode.id;
+
+                    console.log(response_decode_id);
+
+                    $('#danger-header-modal #AlertRegisterTitle').text(response_decode.name);
+                    $('#danger-header-modal #AlertRegisterText').html('Por favor, confirme que deseja mesmo deletar a tarefa: "'+response_decode.name+'".');
+                    $('#ModalButtonDelete').attr('href','{{ route("tarefas.deletar.drop") }}'+'/'+response_decode_id);
+                }
 
                 }
             });
@@ -1006,7 +1022,13 @@
             $('#task-detail-modal #TaskModal-owner-tooltip').attr('title','Responsável');
 
         })
-        
+/*
+        $('#ModalButtonDelete').click(function(event){
+            event.preventDefault();
+            
+           
+        });
+        */
    
 </script>
 
@@ -1076,7 +1098,7 @@ function sort() {
                 $('body.overlaySpinner #ContainerSpinner-kanbanTasks').remove();
                 $('body').removeClass('overlaySpinner');
                 window.location.href = response;
-            }, 500);
+            }, 100);
             
             
         }

@@ -367,9 +367,31 @@ class TarefaController extends Controller
      * @param  \App\Models\Tarefa  $tarefa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tarefa $tarefa)
+    public function destroy($task_id)
     {
-        //
+        $tarefa = new Tarefa();
+        $tarefa = $tarefa->find($task_id);
+
+        $tarefa->delete();
+
+        // $tarefa = '';
+
+        if ( $tarefa ) {
+               
+            $type = 'success';
+            $msg = 'Tarefa deletada com sucesso.';
+            $url_redirect = route('tarefas.listagem');
+        } else {
+            $type = 'error';
+            $msg = 'Algum erro ocorreu ao tentar deletar a tarefa.';
+            $url_redirect = route('tarefas.listagem');
+        }
+   
+   
+    $this->notificationApp($type,$msg);
+    return redirect( $url_redirect );
+
+
     }
 
     public function statuses_tasks()

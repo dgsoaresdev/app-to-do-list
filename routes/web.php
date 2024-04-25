@@ -58,6 +58,12 @@ Route::prefix('/tarefas')->group( function()
     Route::post('editar/update/{id?}', [App\Http\Controllers\TarefaController::class, 'update'])->name('tarefas.editar.update');
     Route::get('editar/update/{id?}', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.editar.update');
 
+    // Deletar
+    Route::get('deletar/{id?}', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.deletar');
+    //Route::post('deletar/drop/{id?}', [App\Http\Controllers\TarefaController::class, 'destroy'])->name('tarefas.deletar.drop');
+    Route::get('deletar/drop/{id?}', [App\Http\Controllers\TarefaController::class, 'destroy'])->name('tarefas.deletar.drop');
+    //
+
     Route::get('open/{id?}', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.open');
 
     Route::post('task_dragdrop_reorder', [App\Http\Controllers\TarefaController::class, 'task_dragdrop_reorder'])->name('tarefas.task_dragdrop_reorder');

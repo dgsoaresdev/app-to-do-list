@@ -112,6 +112,9 @@
                                             @forelse ( $tarefa_store_by_status[$status_key] as $tarefa_store_by_status_key => $tarefa_store_by_status_value )
                                                 {{-- {{ $tarefa_store_by_status_value->name }} --}}
                                                 <div id="{{ $tarefa_store_by_status_value->id }}" class="card mb-0 draggable-item" draggable="true">
+
+                                               
+
                                                 <div class="card-body p-3">
                                                     <small class="float-end text-muted">{{ date('d/m/Y', strtotime($tarefa_store_by_status_value->created_at) ) }}</small>
                                                     <span class="badge {{ $arr_priorities[$tarefa_store_by_status_value->priority]['label'] }}">{{ $arr_priorities[$tarefa_store_by_status_value->priority]['name']}}</span>
@@ -143,7 +146,9 @@
                                                             <a class="offCanvasButton dropdown-item" data-bs-toggle="offcanvas" href="{{ route('tarefas.editar',$tarefa_store_by_status_value->id) }}" data-bs-title="Editar tarefa" role="button" aria-controls="offcanvasRight" 
             data-bs-toggle="offcanvasRight" data-bs-target="#offcanvasRight"><i class="mdi mdi-pencil me-1"></i>Editar</a>
                                                             <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Deletar</a>
+                                                            <a href="{{ route('tarefas.deletar',$tarefa_store_by_status_value->id) }}" class="dropdown-item ModalButton" data-bs-title="Deletar tarefa" data-bs-toggle="modal" data-bs-target="#danger-header-modal">
+                                                                <i class="mdi mdi-delete me-1"></i>Deletar
+                                                            </a>
                                                         </div>
                                                     </div>
 
@@ -172,6 +177,28 @@
                             </div>
                         </div>
                         <!-- end row-->
+                        <!-- MODALS -------------------------------------------------------------------------->
+                        <!--  Alert --------------->
+
+                        <div id="danger-header-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header modal-colored-header bg-danger">
+                                        <h4 class="modal-title" id="danger-header-modalLabel">Deletar tarefa</h4>
+                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-hidden="true"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 id="AlertRegisterTitle">Carregando...</h5>
+                                        <p id="AlertRegisterText">Carregando...</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+                                        <a id="ModalButtonDelete" href="javascript:void(0)" class="btn btn-danger ModalButtonDelete">DELETAR</a>
+                                    </div>
+                                </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                        </div><!-- /.modal -->
+
                         <!--  Task details modal -->
                         <div class="modal fade task-modal-content" id="task-detail-modal" tabindex="-1" role="dialog" aria-labelledby="TaskDetailModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-lg">

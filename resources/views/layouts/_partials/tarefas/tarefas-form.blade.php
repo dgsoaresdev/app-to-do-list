@@ -91,8 +91,9 @@
     
     <div class="mt-3 mb-3 mb-sm-0 text-right d-flex">
         <button type="submit" class="btn btn-primary">Salvar</button>
-        <div id="MsgFieldsRequireds" class="bg-warning ms-2 p-2 rounded d-none">
-            Por favor, preencha todos os campos obrigatórios.
+        <div id="MsgFieldsRequireds" class="alert alert-danger ms-2 mb-0 p-1 rounded d-none" role="alert">
+            <i class="ri-close-circle-line me-0"></i>
+            Por favor, <strong>preencha</strong> todos os campos <strong>obrigatórios</strong>.
         </div>
     </div>
 
