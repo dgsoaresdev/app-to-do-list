@@ -49,7 +49,7 @@ Route::prefix('/tarefas')->group( function()
 
     Route::get('open/{id?}', [App\Http\Controllers\TarefaController::class, 'show'])->name('tarefas.open');
 
-    Route::post('dragtask', [App\Http\Controllers\TarefaController::class, 'dragtask'])->name('tarefas.dragtask');
+    Route::post('task_dragdrop_reorder', [App\Http\Controllers\TarefaController::class, 'task_dragdrop_reorder'])->name('tarefas.task_dragdrop_reorder');
 
 });
 

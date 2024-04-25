@@ -1,5 +1,5 @@
                     
-<div class="content">
+<div class="content tasks_kanban_container">
 
     <!-- Start Content-->
     <div class="container-fluid">
@@ -88,66 +88,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-{{--                                 
-                                @foreach( $administradoras as $administradora_details)
-                                <tr>
-                                        <td>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="customCheck2">
-                                                <label class="form-check-label" for="customCheck2">&nbsp;</label>
-                                            </div>
-                                        </td>
-                                        <td class="table-user">
-                                            <img src="{{ asset('assets/images/favicon.png') }}" alt="table-user" class="me-2 rounded-circle">
-                                            <a href="{{ route('administradoras.details', $administradora_details['id'])}}" class="text-body fw-semibold">{{ $administradora_details['title'] }}</a>
-                                        </td>
-                                        <td class="table-user">
-                                        <img src="{{ asset('assets/images/users/avatar-2.jpg') }}" alt="table-user" class="me-2 rounded-circle">
-                                            Paul J. Friend
-                                        </td>
-                                        <td>
-                                            <span class="fw-semibold">Ceará (NE)</span>
-                                        </td>
-                                        <td>
-                                            101
-                                        </td>
-                                        <td>
-                                            427
-                                        </td>
-                                        
-                                        <td>
-                                            <div class="spark-chart" data-dataset="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]"></div>
-                                        </td>
-                                        <td>
-                                                <input type="checkbox" id="status-{{ $administradora_details['id'] }}" name="status" value="1" checked data-switch="success"/>
-                                                <label for="status-{{ $administradora_details['id'] }}" data-on-label="ON" data-off-label="OFF"></label>
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('administradoras.details', $administradora_details['id'] )}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                 --}}
                                 </tbody>
                             </table>
                         </div>
                         @else
                         <div class="row">
+                                
+                                <div class="d-flex justify-content-center mb-3 mt-1">
+                                    @csrf
+                                    <button class="btn btn-success" onclick="sort()">SALVAR ALTERAÇÕES</button>
+                                </div>
+
                             <div class="col-12">
                                 <div class="board">
-                                
-                                @csrf
-                                <button onclick="sort()">SALVAR</button>
-
-                               
-                                
                                  @foreach( $statuses_tasks as $status_key => $status_value )
 
                                  <div class="tasks tasksDragular" @if( $status_key == 0 ) data-plugin="dragula" data-containers='{{ $statuses_tasks_values_in_line }}' @endif >
-                                        <h5 class="mt-0 task-header text-uppercase">{{ $status_value }} (3)</h5>
+                                        <h5 class="mt-0 task-header text-uppercase">{{ $status_value }}</h5>
                                         
-                                        <div id="status-{{ $status_key }}" class="task-list-items draggable-item-" >
+                                        <div id="status_{{ $status_key }}" class="task-list-items draggable-item-" >
 
                                             <!-- Task Item -->
                                             @forelse ( $tarefa_store_by_status[$status_key] as $tarefa_store_by_status_key => $tarefa_store_by_status_value )
@@ -179,7 +138,7 @@
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-end">
                                                             <!-- item-->
-                                                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-eye me-1"></i>Abrir</a>
+                                                            <a href="{{ route('tarefas.open', $tarefa_store_by_status_value->id)}}" data-bs-toggle="modal" data-bs-target="#task-detail-modal" class="dropdown-item ModalButton"><i class="mdi mdi-eye me-1"></i>Abrir</a>
                                                             <!-- item-->
                                                             <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Editar</a>
                                                             <!-- item-->
@@ -207,6 +166,9 @@
                                  @endforeach
                                 </div> <!-- end .board-->
                             </div> <!-- end col -->
+                            <div class="d-flex justify-content-center mb-3 mt-1">       
+                                <button class="btn btn-success" onclick="sort()">SALVAR ALTERAÇÕES</button>
+                            </div>
                         </div>
                         <!-- end row-->
                         <!--  Task details modal -->

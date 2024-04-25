@@ -136,7 +136,7 @@ class TarefaController extends Controller
         $statuses_tasks_values_in_line = array();
         $tarefa_store_by_status = array();
         foreach($statuses_tasks as $statuses_key =>$statuses_value ){
-            $statuses_tasks_values_in_line[] = 'status-'.$statuses_key;
+            $statuses_tasks_values_in_line[] = 'status_'.$statuses_key;
 
             $tarefa_store_by_status[$statuses_key] = $tarefas->store('tasks_by_status','',$statuses_key);
 
@@ -236,15 +236,55 @@ class TarefaController extends Controller
         //
     }
 
-    public function dragtask()
+    public function task_dragdrop_reorder()
     {
-        $tasks_array = $_POST['tasks_array'];
         $token       = $_POST['_token'];
+        $tasks_array = $_POST['tasks_array'];
 
-        //$tasks_array = json_decode$tasks_array
+        $tasks_array_decode = json_decode($tasks_array);
+        
 
-        //
-        return $tasks_array;
+        foreach((array) $tasks_array_decode as $key => $value) {
+            foreach((array) $value as $task_item_key => $task_item_value) {
+                $status = explode('_',$key);
+                $status = $status[1];
+                $data_task['status'] = $status;
+                $data_task['order_in_card'] = $task_item_key;
+                $this->update_task_ajax_kanban($task_item_value,$data_task);
+            }
+        }
+        $success = true;
+
+        if ( $success ) {
+               
+            $type = 'success';
+            $msg = 'Tarefas atualizadas com sucesso.';
+            // $url_redirect = route('tarefas.details', $tarefa_id);
+            $url_redirect = route('tarefas.listagem');
+        } else {
+            $type = 'error';
+            $msg = 'Algum erro ocorreu ao tentar atualizar as tarefas.';
+            $url_redirect = route('tarefas.listagem');
+        }
+
+        $this->notificationApp($type,$msg);
+        return $url_redirect;
+
+        //return json_encode($data_task);
+
+    }
+
+    public function update_task_ajax_kanban($id_task="", $data_task=""){
+
+        $tarefa = new Tarefa();
+
+        $tarefa = $tarefa->find($id_task);
+
+        $tarefa->status          =  $data_task['status'];
+        $tarefa->order_in_card   =  $data_task['order_in_card'];
+
+        $tarefa->save();
+
     }
     
     /**

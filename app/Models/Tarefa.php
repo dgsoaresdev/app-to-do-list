@@ -15,13 +15,13 @@ class Tarefa extends Model
         //$type = 'tasks_by_id';
 
         if ( $type == 'tasks_by_id' ) {
-            $store = Tarefa::where('id', '=', $value)->orderBy('id', 'DESC')->get();
+            $store = Tarefa::where('id', '=', $value)->orderBy('order_in_card', 'ASC')->get();
         }
         elseif ( $type == 'tasks_by_status' ) {
-            $store = Tarefa::where('status', '=', $status)->orderBy('id', 'DESC')->get();
+            $store = Tarefa::where('status', '=', $status)->orderBy('order_in_card', 'ASC')->get();
         } 
         else {
-            $store = Tarefa::orderBy('id', 'DESC')->get();
+            $store = Tarefa::orderBy('order_in_card', 'ASC')->get();
         }
         
         return $store;

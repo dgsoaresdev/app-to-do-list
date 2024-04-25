@@ -1021,17 +1021,18 @@
 
 function sort() {
 
-    var _token = $('.board input[name="_token"]').val();
-    
-    var url_drag = "{{ route('tarefas.dragtask') }}";
+    $('body').addClass('overlaySpinner');
+    $('body').prepend('<div id="ContainerSpinner-kanbanTasks" style="z-index:99999" class="ContainerSpinner d-flex justify-content-center align-items-center h-100 col-12"><div class="spinner-border avatar-md text-primary m-2" role="status"></div></div>');
 
-    var containerArray = ["status-0","status-1","status-2","status-3","status-4","status-5"];
+    var _token = $('.tasks_kanban_container input[name="_token"]').val();
+    
+    var url_dragdrop = "{{ route('tarefas.task_dragdrop_reorder') }}";
+
+    var containerArray = ["status_0","status_1","status_2","status_3","status-4","status_5"];
     var containerArray_multi = [];
     var containerArray_multi_values = [];
-    var itemArray = [];
-    var itemJSON;
-    for(var i = 0; i < containerArray.length; i++) {
 
+    for(var i = 0; i < containerArray.length; i++) {
 
         $('#'+containerArray[i]).each(function () {  
             
@@ -1053,14 +1054,14 @@ function sort() {
         
     }
 
-  
-    tasks_array_json = JSON.stringify(containerArray_multi);
+    //tasks_array_json = JSON.stringify(arr_debug);
 
-    console.log(containerArray_multi);
+    tasks_array_json = JSON.stringify(Object.assign({}, containerArray_multi));
 
-        
+    //console.log(tasks_array_json);    
+
     $.ajax({
-        url: url_drag,
+        url: url_dragdrop,
         type : 'POST',
         data : {
             _token: _token,
@@ -1068,7 +1069,16 @@ function sort() {
             },
         success: function(response)
         {
-            console.log(response);
+
+           // console.log('Response: ' + response);
+
+            setTimeout(function() { 
+                $('body.overlaySpinner #ContainerSpinner-kanbanTasks').remove();
+                $('body').removeClass('overlaySpinner');
+                window.location.href = response;
+            }, 500);
+            
+            
         }
            
         });
