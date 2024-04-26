@@ -1,64 +1,93 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<h1 align="center">Aplicação de Sistema de Tarefas</h1>
+    <a href="https://diogosoares.com.br/projetos/laravel_asaas/public/" target="_blank"><img alt="Laravel Asaas" title="Laravel Asaas" src="https://github.com/dgsoaresdev/app-to-do-list/assets/25693566/21d1eafd-5d43-4375-a2b2-0e24ac20b322" width="100%" /></a>
+
+<a href="https://diogosoares.com.br/projetos/app-todolist/public/" target="_blank">Acesse o projeto publicado</a>
+
+<h4 align="center"> 
+ Version 1.0 🚀 Concluído! 
+</h4>
 
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  
+  <img src="https://img.shields.io/static/v1?label=Languages&message=Laravel/PHP/JavaScript/CSS3/HTML5&color=blue&style=flat" />
+  	
+  <a href="https://twitter.com/DgSoaresDev">
+    <img alt="Siga no Twitter" src="https://img.shields.io/twitter/url?url=https://twitter.com/DgSoaresTech">
+  </a>
+	
+   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
+   
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 💻 Sobre o projeto
+Sistema de gestão de tarefas, com quadro em Kanban
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 💻 Testando a aplicação 
+A partir dos dados listados abaixo, você poderá realizar testes na aplicação - após a sua implantação em seu ambiente.
 
-## Learning Laravel
+### Cadastro
+- Faça o seu cadastro de usuário.
+- Faça o login.
+- Siga para a tela de tarefas.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Tarefas
+- Cadstre novas tarefas.
+- Edite tarefas existentes.
+- Troque os status das tarefas, por meio da interação Drag&Drop no quadro Kanban.
+- Delete tarefas.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+## 🛠 Tabelas do banco de dados
+- Tabela "tarefas": Guarda os dados de todas as tarefas.
+- Tabela "users": Guarda os dados cadastrais e de autenticação dos usuários.
+  
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## 🛠 Tecnologias
 
-### Premium Partners
+As seguintes ferramentas foram usadas na construção do projeto:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Laravel 8
+- PHP 7.4
+- Composer 2
+- PHP e MySQL
+- Bootstrap
+- HTML5 e CSS3
+- JavaScript
+- jQuery
+- Ajax
+- Hyper (Dashboard Kit UI)
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+## 🚀 Como rodar o projeto?
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+###Pré-requisitos
 
-## Security Vulnerabilities
+Também é bom ter um editor para trabalhar com o código como [VSCode][vscode]
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 🎲 Running 
+```bash
+## Clone este repositório
+$ git clone git@github.com:dgsoaresdev/app-to-do-list.git
 
-## License
+## Acesse o diretório do projeto via terminal/cmd
+$ cd app-to-do-list
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+##Instale as dependências do projeto, via composer
+$ composer install
+
+## Crie as tabelas do banco dados
+$ php artisan migrate
+
+
+```
+
+## 📝 Licence
+
+This project is licensed under the MIT license.
+
+Made with ❤️ by Diogo Soares 👋🏽 [Contact me!](https://www.linkedin.com/in/dgsoares/)
+
+
