@@ -31,7 +31,7 @@ class EmailDeletaTarefa extends Mailable
         $this->deadline = date('d/m/Y H:i', strtotime( $tarefa->deadline ));
         $this->priority = $priorities[$tarefa->priority];
         $this->status   = $statuses[$tarefa->status];
-        $this->url = 'http://localhost:8000/tarefas/listagem';
+        $this->url = url('/public/tarefas/listagem');
     }
 
     /**
