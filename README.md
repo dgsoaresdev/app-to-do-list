@@ -76,13 +76,13 @@ Também é bom ter um editor para trabalhar com o código como [VSCode][vscode]
 
 ### 🎲 Running 
 ```bash
-## Clone este repositório
+## Clone este repositório. No terminal, execute:
 $ git clone git@github.com:dgsoaresdev/app-to-do-list.git
 
-## Acesse o diretório do projeto via terminal/cmd
+## Acesse o diretório do projeto via terminal/cmd - No terminal, execute:
 $ cd app-to-do-list
 
-##Instale as dependências do projeto, via composer
+##Instale as dependências do projeto, via composer. No terminal, execute:
 $ composer install
 
 ## Duplique o arquivo ".env.example" e renomeie a cópia para o nome .env
@@ -109,10 +109,13 @@ $ MAIL_ENCRYPTION=SSL #(Protocolo SSL ou TLS)
 $ MAIL_FROM_ADDRESS=noreply@emailexemplo.com #(Endereço de e-mail do remetente que enviará os envios)
 $ MAIL_FROM_NAME="${APP_NAME}" #(Nome do remetente que enviará os envios)
 
-## Execute as migrations para que as tabelas da aplicação possam ser criadas no banco dados
+## Faça a atualização dos caches. No terminal, execute:
+$ php artisan config:cache
+
+## Execute as migrations para que as tabelas da aplicação possam ser criadas no banco dados. No terminal, execute:
 $ php artisan migrate
 
-## Execute o para artisan serve para disponibilizar o a aplicação no seu servidor local
+## Execute o para artisan serve para disponibilizar o a aplicação no seu servidor local. No terminal, execute:
 $ php artisan serve
 
 ## Acesse a aplicação através da URL gerada pelo serve
