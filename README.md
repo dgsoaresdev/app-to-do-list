@@ -11,7 +11,7 @@
   
   <img src="https://img.shields.io/static/v1?label=Languages&message=Laravel/PHP/JavaScript/CSS3/HTML5&color=blue&style=flat" />
   	
-  <a href="https://twitter.com/DgSoaresDev">
+  <a href="https://twitter.com/DgSoaresTech">
     <img alt="Siga no Twitter" src="https://img.shields.io/twitter/url?url=https://twitter.com/DgSoaresTech">
   </a>
 	
