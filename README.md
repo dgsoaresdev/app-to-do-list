@@ -49,7 +49,7 @@ A partir dos dados listados abaixo, você poderá realizar testes na aplicação
 As seguintes ferramentas foram usadas na construção do projeto:
 
 - Laravel 8
-- PHP 7.4
+- PHP 8
 - Composer 2
 - PHP e MySQL
 - Bootstrap
@@ -64,6 +64,13 @@ As seguintes ferramentas foram usadas na construção do projeto:
 ## 🚀 Como rodar o projeto?
 
 ###Pré-requisitos
+- PHP 8
+- MySQL
+- Apache
+- Composer 2
+- Node.Js
+- npm
+
 
 Também é bom ter um editor para trabalhar com o código como [VSCode][vscode]
 
