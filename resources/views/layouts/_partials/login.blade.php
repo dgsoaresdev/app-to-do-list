@@ -6,7 +6,7 @@
 
                             <!-- Logo -->
                             <div class="card-header py-4 text-center bg-primary">
-                                <a href="index.html">
+                                <a href="{{ route('dashboard') }}">
                                     <span><img src="assets/images/logo.png" alt="logo" height="22"></span>
                                 </a>
                             </div>
