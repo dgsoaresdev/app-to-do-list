@@ -46,7 +46,7 @@
 
                         <li class="side-nav-title">NAVEGUE</li>
                         <li class="side-nav-item">
-                            <a href="/dashboard" class="side-nav-link">
+                            <a href="{{ route('dashboard') }}" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
                                 <span>Dashboard</span>
                             </a>
