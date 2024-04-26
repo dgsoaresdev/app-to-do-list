@@ -20,23 +20,29 @@ Route::get('home', function () {
     return redirect('/');
 });
 
+Route::get('login', function () {
+    return view('auth.login');
+})->name('login');
+
 Route::get('/', function () {
     return redirect('login');
 });
 
-Auth::routes();
 
-// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
 
 
 
 Route::get('/', function () {
-    return view('pagina', ['slug_page'=>'dashboard', 'page_slug'=>'dashboard']);
+    //return view('pagina', ['slug_page'=>'dashboard', 'page_slug'=>'dashboard']);
+    return redirect('/tarefas/listagem');
 })->name('home.dashboard');
 
 
 Route::get('dashboard', function () {
-    return view('pagina', ['slug_page'=>'dashboard', 'page_slug'=>'dashboard']);
+    //return view('pagina', ['slug_page'=>'dashboard', 'page_slug'=>'dashboard']);
+    return redirect('/tarefas/listagem');
 })->name('dashboard');
 
 
@@ -81,5 +87,3 @@ Route::get('tarefas-emails', function(){
     Mail::to('dg@diogosoares.com.br')->send(new EmailsTarefas());
     return 'Email enviado com sucesso!';
 });
-
- //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

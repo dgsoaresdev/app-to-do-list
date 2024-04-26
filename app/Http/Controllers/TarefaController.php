@@ -25,6 +25,9 @@ class TarefaController extends Controller
     public function index()
     {
         //
+        if (!Auth::check()) {
+            redirect( route('login') );
+        }
     }
 
     public function users($user_id = "")
@@ -84,7 +87,9 @@ class TarefaController extends Controller
      */
     public function create( Request $request )
     {
-        
+        if ( !Auth::check() ){
+            return redirect( route('login') );        
+        }
 
         if ( isset($request)) {
             
@@ -145,7 +150,9 @@ class TarefaController extends Controller
      */
     public function store(Tarefa $tarefas, $view_mode = "")
     {
-        //
+        if ( !Auth::check() ){
+            return redirect( route('login') );        
+        }
         // $tarefa_store = $request->store();
 
         $tarefa_store     = $tarefas->store();
@@ -186,11 +193,7 @@ class TarefaController extends Controller
 
         }
 
-        if ( !Auth::check() ){
-
-            return redirect( route('home') );
         
-        }
 
         return view('pagina', ['slug_page'=>'tarefas', 'page_slug'=>'tarefas', 'owners_tasks'=>$owners_tasks, 'statuses_tasks'=>$statuses_tasks, 'arr_priorities' => $arr_priorities, 'priorities_tasks' => $priorities_tasks, 'view_mode' => $view_mode, 'statuses_tasks_values_in_line' => $statuses_tasks_values_in_line, 'tarefa_store_by_status' => $tarefa_store_by_status]);
     }
@@ -198,6 +201,10 @@ class TarefaController extends Controller
 
     public function search(Tarefa $tarefas, $keyword = "")
     {
+
+        if ( !Auth::check() ){
+            return redirect( route('login') );        
+        }
         //
         // $tarefa_store = $request->store();
 
@@ -239,11 +246,7 @@ class TarefaController extends Controller
 
         }
 
-        if ( !Auth::check() ){
-
-            return redirect( route('home') );
         
-        }
 
         return view('pagina', ['slug_page'=>'tarefas', 'page_slug'=>'tarefas', 'owners_tasks'=>$owners_tasks, 'statuses_tasks'=>$statuses_tasks, 'arr_priorities' => $arr_priorities, 'priorities_tasks' => $priorities_tasks, 'view_mode' => 'kanban', 'statuses_tasks_values_in_line' => $statuses_tasks_values_in_line, 'tarefa_store_by_status' => $tarefa_store_by_status]);
     }
@@ -256,6 +259,11 @@ class TarefaController extends Controller
      */
     public function show(Tarefa $tarefas, $id="")
     {
+
+        if ( !Auth::check() ){
+            return redirect( route('login') );        
+        }
+
         $get_tarefa = $tarefas->store('tasks_by_id', $id, "");
         
         $get_tarefa = $get_tarefa[0];
@@ -308,6 +316,9 @@ class TarefaController extends Controller
     public function edit(Tarefa $tarefa)
     {
         //
+        if ( !Auth::check() ){
+            return redirect( route('login') );        
+        }
     }
 
     public function task_dragdrop_reorder()
@@ -383,6 +394,10 @@ class TarefaController extends Controller
      */
     public function update( Request $request, $id_task="")
     {
+
+        if ( !Auth::check() ){
+            return redirect( route('login') );        
+        }
             $tarefa = new Tarefa();
             $tarefa = $tarefa->find($id_task);
 
@@ -436,6 +451,10 @@ class TarefaController extends Controller
      */
     public function destroy($task_id)
     {
+
+        if ( !Auth::check() ){
+            return redirect( route('login') );        
+        }
         $tarefa_model = new Tarefa();
         $tarefa = $tarefa_model->find($task_id);
 
