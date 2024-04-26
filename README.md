@@ -109,6 +109,9 @@ $ MAIL_ENCRYPTION=SSL #(Protocolo SSL ou TLS)
 $ MAIL_FROM_ADDRESS=noreply@emailexemplo.com #(Endereço de e-mail do remetente que enviará os envios)
 $ MAIL_FROM_NAME="${APP_NAME}" #(Nome do remetente que enviará os envios)
 
+## OBS: Certifique-se de que os dados de conexão SMTP estão devidamente configurados, pois sem isto, a aplicação apresentará erros durante as interações de criação e atualização de tarefas.
+
+
 ## Faça a atualização dos caches. No terminal, execute:
 $ php artisan config:cache
 
