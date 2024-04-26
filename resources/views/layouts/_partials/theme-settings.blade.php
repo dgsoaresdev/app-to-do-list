@@ -1052,7 +1052,7 @@
             event.preventDefault();
 
             var task_keyword = $('#task_search').val();
-            
+
             if( task_keyword.length > 2 ) {
                 window.location.href = "{{ route('tarefas.busca') }}/"+task_keyword;
             }              
@@ -1079,7 +1079,7 @@ function sort() {
     
     var url_dragdrop = "{{ route('tarefas.task_dragdrop_reorder') }}";
 
-    var containerArray = ["status_0","status_1","status_2","status_3","status-4","status_5"];
+    var containerArray = ["status_1","status_2","status_3","status_4","status_5","status_6"];
     var containerArray_multi = [];
     var containerArray_multi_values = [];
 

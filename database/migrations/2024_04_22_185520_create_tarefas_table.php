@@ -20,8 +20,8 @@ class CreateTarefasTable extends Migration
             $table->integer('project_id')->nullable();
             $table->integer('user_id');
             $table->integer('owner_id');
-            $table->integer('status')->default('0');
-            $table->integer('priority')->default('1');
+            $table->integer('status')->default('0')->nullable();
+            $table->integer('priority')->default('1')->nullable();
             $table->integer('order_in_card')->default('0');
             $table->dateTime('start_datetime')->nullable();
             $table->dateTime('deadline')->nullable();

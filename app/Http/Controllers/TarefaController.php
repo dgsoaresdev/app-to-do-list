@@ -6,8 +6,12 @@ use App\Models\Tarefa;
 use App\Mail\WelcomeEmail;
 use App\Mail\EmailsTarefas;
 use Illuminate\Http\Request;
+use App\Mail\EmailNovaTarefa;
+use App\Mail\EmailDeletaTarefa;
+use App\Mail\EmailAtualizaTarefa;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailAtualizaStatusTarefa;
 use App\Http\Requests\StoreTarefaRequest;
 use App\Http\Requests\UpdateTarefaRequest;
 
@@ -83,33 +87,7 @@ class TarefaController extends Controller
         
 
         if ( isset($request)) {
-            //=========================================
-            // Tratando os campos obrigatórios através do método nativo do Laravel
-            //=========================================
-            // $request->validate(
-            //     [
-            //         'name'             => 'required',
-            //         'owner_id'         => 'required',
-            //         'status'           => 'required',
-            //         'priority'         => 'required',
-            //         'start_datetime'   => 'required',
-            //         'deadline'         => 'required'  
-            //     ],
-            //     [
-            //         'name.required'                 => 'O campo "Nome" é obrigatório.',
-            //         'owner_id.required'             => 'Selecione um responsável pela tarefa',
-            //         'status.required'               => 'Selecione um status para a tarefa',
-            //         'priority.required'             => 'Selecione uma prioridade para a tarefa',
-            //         'start_datetime.required'       => 'Selecione uma data e horário para começar a tarefa',
-            //         'deadline.required'            => 'Selecione uma data e horário para concluir a tarefa'
-            //     ]
-            // );
-        
-            // ==========
-            // Retirando os caracteres especiais das strings
-            // ==========
-
-           
+            
             $tarefa = new Tarefa();
 
             $tarefa->name                   = $request->input('name');
@@ -131,19 +109,28 @@ class TarefaController extends Controller
                
                 $type = 'success';
                 $msg = 'Tarefa adicionada com sucesso.';
-                // $url_redirect = route('tarefas.details', $tarefa_id);
-                $url_redirect = route('tarefas.details');
+                $url_redirect = route('tarefas.listagem');
             } else {
                 $type = 'error';
                 $msg = 'Algum erro ocorreu ao tentar adicionar a tarefa.';
-                $url_redirect = route('tarefas.details');
+                $url_redirect = route('tarefas.listagem');
             }
         } else {
             $type = 'error';
             $msg = 'Algum erro ocorreu ao tentar adicionar a tarefa.';
-            $url_redirect = route('tarefas.details');
+            $url_redirect = route('tarefas.listagem');
         }
 
+        //=======================
+        // Start - Send Email Notification
+        //=======================
+        $model_tarefa = new Tarefa;
+        $owner_tarefa_details = $model_tarefa->users( $tarefa->owner_id )[0];
+        $destinatario = $owner_tarefa_details->email;
+        Mail::to($destinatario)->send( new EmailNovaTarefa($tarefa, $this->priorities_tasks(), $this->statuses_tasks()));
+        //=======================
+        // End - Send Email Notification
+        //=======================
        
         $this->notificationApp($type,$msg);
         return redirect( $url_redirect );
@@ -186,13 +173,13 @@ class TarefaController extends Controller
 
             switch($priorities_key){
                 
-                case 0 :
+                case 1 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-danger';
                 break;
-                case 1 :
+                case 2 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-warning text-black';
                 break;
-                case 2 :
+                case 3 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-primary';
                 break;
             }
@@ -239,13 +226,13 @@ class TarefaController extends Controller
 
             switch($priorities_key){
                 
-                case 0 :
+                case 1 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-danger';
                 break;
-                case 1 :
+                case 2 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-warning text-black';
                 break;
-                case 2 :
+                case 3 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-primary';
                 break;
             }
@@ -285,13 +272,13 @@ class TarefaController extends Controller
 
             switch($priorities_key){
                 
-                case 0 :
+                case 1 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-danger';
                 break;
-                case 1 :
+                case 2 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-warning text-black';
                 break;
-                case 2 :
+                case 3 :
                     $arr_priorities[$priorities_key]['label'] = 'bg-primary';
                 break;
             }
@@ -363,14 +350,27 @@ class TarefaController extends Controller
 
     public function update_task_ajax_kanban($id_task="", $data_task=""){
 
-        $tarefa = new Tarefa();
+        $tarefa_model = new Tarefa;
 
-        $tarefa = $tarefa->find($id_task);
+        $tarefa = $tarefa_model->find($id_task);
 
         $tarefa->status          =  $data_task['status'];
         $tarefa->order_in_card   =  $data_task['order_in_card'];
 
         $tarefa->save();
+        
+        //=======================
+        // Start - Send Email Notification
+        // Para funcionar, terei de criar um meio de identificar quais TASKS de fato foram alteradas e aplicar a mudança somente à elas, pois a requisição está processando todas as tasks.
+        //=======================
+        //
+        // $owner_tarefa_details = $tarefa_model->users( $tarefa->owner_id )[0];
+        // $destinatario = $owner_tarefa_details->email;
+        // Mail::to($destinatario)->send( new EmailAtualizaStatusTarefa($tarefa, $this->priorities_tasks(), $this->statuses_tasks()));
+
+        //=======================
+        // End - Send Email Notification
+        //=======================
 
     }
     
@@ -411,23 +411,20 @@ class TarefaController extends Controller
                 $url_redirect = route('tarefas.listagem');
             }
 
-            $email_params = array(
-                'to'=> 'dg@diogosoares.com.br',
-                'to_name' => 'Nome e Sobrenome',
-                'subject' => 'Tarefa Atualizada',
-                'body' => 'A Tarefa '.$tarefa->name.' foi atualizada.'
-            );
-
-            $email_nofification = new EmailsTarefas();
-            $email_nofification = $email_nofification->build();
-
-            Mail::to('dg@diogosoares.com.br')->send( $email_nofification );
-
-            
+            //=======================
+            // Start - Send Email Notification
+            //=======================
+            $model_tarefa = new Tarefa;
+            $owner_tarefa_details = $model_tarefa->users( $tarefa->owner_id )[0];
+            $destinatario = $owner_tarefa_details->email;
+            Mail::to($destinatario)->send( new EmailAtualizaTarefa($tarefa, $this->priorities_tasks(), $this->statuses_tasks()));
+            //=======================
+            // End - Send Email Notification
+            //=======================            
        
        
-        $this->notificationApp($type,$msg);
-        return redirect( $url_redirect );
+            $this->notificationApp($type,$msg);
+            return redirect( $url_redirect );
         
     }
 
@@ -439,8 +436,8 @@ class TarefaController extends Controller
      */
     public function destroy($task_id)
     {
-        $tarefa = new Tarefa();
-        $tarefa = $tarefa->find($task_id);
+        $tarefa_model = new Tarefa();
+        $tarefa = $tarefa_model->find($task_id);
 
         $tarefa->delete();
 
@@ -456,6 +453,18 @@ class TarefaController extends Controller
             $msg = 'Algum erro ocorreu ao tentar deletar a tarefa.';
             $url_redirect = route('tarefas.listagem');
         }
+
+        //=======================
+        // Start - Send Email Notification
+        //=======================
+
+        $owner_tarefa_details = $tarefa_model->users( $tarefa->owner_id )[0];
+        $destinatario = $owner_tarefa_details->email;
+        Mail::to($destinatario)->send( new EmailDeletaTarefa($tarefa, $this->priorities_tasks(), $this->statuses_tasks()));
+
+        //=======================
+        // End - Send Email Notification
+        //=======================
    
    
     $this->notificationApp($type,$msg);
@@ -467,12 +476,12 @@ class TarefaController extends Controller
     public function statuses_tasks()
     {
         $tasks_status = array(
-            0 => 'Não Iniciada',
-            1 => 'Em andamento',
-            2 => 'Concluída',
-            3 => 'Pausada',
-            4 => 'Atrasada',
-            5 => 'Suspensa',
+            1 => 'Não Iniciada',
+            2 => 'Em andamento',
+            3 => 'Concluída',
+            4 => 'Pausada',
+            5 => 'Atrasada',
+            6 => 'Suspensa',
         );
         return $tasks_status;
     }
@@ -480,9 +489,9 @@ class TarefaController extends Controller
     public function priorities_tasks()
     {
         $tasks_status = array(
-            0 => 'Alta',
-            1 => 'Média',
-            2 => 'Baixa'
+            1 => 'Alta',
+            2 => 'Média',
+            3 => 'Baixa'
         );
         return $tasks_status;
     }

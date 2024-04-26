@@ -39,42 +39,10 @@
                                 </div>
                             </form>
                             </div>
-                                {{-- <div class="text-sm-end">
-                                    <button type="button" class="btn btn-secondary mb-2 me-1 mb-sm-0"><i class="mdi mdi-cog"></i></button>
-                                    <button type="button" class="btn btn-light mb-2 me-1 mb-sm-0">Importar</button>
-                                    <button type="button" class="btn btn-light mb-2 mb-sm-0">Exportar</button>
-                                </div> --}}
+                                
                             </div><!-- end col-->
                         </div>
-                        {{-- <div class="row">
-                                <form method="GET" action="{{ route('tarefas.listagem') }}" class="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between mt-0 mb-2">
-                                    <div class="col-5 col-sm-5 col-md-4">
-                                        <div class="d-flex align-items-center">
-                                            <label for="status-select" class="me-2">Priodade</label>
-                                            <select class="form-select" id="zona_id" name="zona_id"> 
-                                                <option selected>Selecione...</option>
-                                                @foreach( $priorities_tasks as $priorities_key => $priorities_value )
-                                                    <option value="{{ $priorities_key }}">{{ $priorities_value }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-5 col-sm-5 col-md-4">
-                                        <div class="d-flex align-items-center">
-                                            <label for="status-select" class="me-2">Status</label>
-                                            <select class="form-select" id="status-select" name="status-select"> 
-                                                <option selected>Selecione...</option>
-                                                @foreach( $statuses_tasks as $status_key => $status_value )
-                                                    <option value="{{ $status_key }}">{{ $status_value }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-2 col-sm-2 d-flex justify-content-start">
-                                        <button type="submit" class="btn btn-secondary">Filtrar</button>
-                                    </div>
-                                </form>
-                        </div> --}}
+                       
                         @if( $view_mode && $view_mode === 'list')
                         <div class="table-responsive">
                             <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="products-datatable">
@@ -112,14 +80,14 @@
                                 <div class="board">
                                  @foreach( $statuses_tasks as $status_key => $status_value )
 
-                                 <div class="tasks tasksDragular" @if( $status_key == 0 ) data-plugin="dragula" data-containers='{{ $statuses_tasks_values_in_line }}' @endif >
+                                 <div class="tasks tasksDragular" @if( $status_key == 1 ) data-plugin="dragula" data-containers='{{ $statuses_tasks_values_in_line }}' @endif >
                                         <h5 class="mt-0 task-header text-uppercase">{{ $status_value }}</h5>
                                         
                                         <div id="status_{{ $status_key }}" class="task-list-items draggable-item-" >
 
                                             <!-- Task Item -->
                                             @forelse ( $tarefa_store_by_status[$status_key] as $tarefa_store_by_status_key => $tarefa_store_by_status_value )
-                                                {{-- {{ $tarefa_store_by_status_value->name }} --}}
+                                                
                                                 <div id="{{ $tarefa_store_by_status_value->id }}" class="card mb-0 draggable-item" draggable="true">
 
                                                
