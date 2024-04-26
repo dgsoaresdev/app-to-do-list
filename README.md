@@ -78,9 +78,32 @@ $ cd app-to-do-list
 ##Instale as dependências do projeto, via composer
 $ composer install
 
+## Duplique o arquivo ".env.example" e renomeie a cópia para o nome .env
+.env
+
+## Crie um banco de dados MySQL sob um nome de sua escolha.
+Ex: app_todolist
+
+## Edite o novo arquivo .env com as credenciais do banco de dados criado
+$ DB_CONNECTION=mysql
+$ DB_HOST=127.0.0.1
+$ DB_PORT=3306
+$ DB_DATABASE=app_todolist #(Nome do banco de dados)
+$ DB_USERNAME=root #(Nome de usuário do banco de dados)
+$ DB_PASSWORD= #(Senha do usuário /banco de dados)
+
+## Edite o novo arquivo .env com as credenciais de um servidor de e-mail SMTP
+$ MAIL_MAILER=smtp
+$ MAIL_HOST=crmplataforma.com
+$ MAIL_PORT=465
+$ MAIL_USERNAME=noreply@emailexemplo.com #(Endereço de e-mail que autenticará os envios)
+$ MAIL_PASSWORD=12345678 #(Senha do e-mail)
+$ MAIL_ENCRYPTION=SSL #(Protocolo SSL ou TLS)
+$ MAIL_FROM_ADDRESS=noreply@emailexemplo.com #(Endereço de e-mail do remetente que enviará os envios)
+$ MAIL_FROM_NAME="${APP_NAME}" #(Nome do remetente que enviará os envios)
+
 ## Crie as tabelas do banco dados
 $ php artisan migrate
-
 
 ```
 
