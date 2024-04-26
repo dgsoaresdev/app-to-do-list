@@ -109,8 +109,14 @@ $ MAIL_ENCRYPTION=SSL #(Protocolo SSL ou TLS)
 $ MAIL_FROM_ADDRESS=noreply@emailexemplo.com #(Endereço de e-mail do remetente que enviará os envios)
 $ MAIL_FROM_NAME="${APP_NAME}" #(Nome do remetente que enviará os envios)
 
-## Crie as tabelas do banco dados
+## Execute as migrations para que as tabelas da aplicação possam ser criadas no banco dados
 $ php artisan migrate
+
+## Execute o para artisan serve para disponibilizar o a aplicação no seu servidor local
+$ php artisan serve
+
+## Acesse a aplicação através da URL gerada pelo serve
+ex: localhost:8000
 
 ```
 
