@@ -14,8 +14,8 @@
                             <div class="card-body p-4">
                                 
                                 <div class="text-center w-75 m-auto">
-                                    <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
-                                    <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
+                                    <h4 class="text-dark-50 text-center pb-0 fw-bold">Login</h4>
+                                    <p class="text-muted mb-4">Insira seu e-mail e senha para se logar.</p>
                                 </div>
 
                                 
@@ -24,9 +24,9 @@
                                     @csrf
 
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">{{ __('E-Mail Address') }}</label>
+                                        <label for="email" class="form-label">{{ __('E-mail') }}</label>
 
-                                        <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email">
+                                        <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Digite seu e-mail">
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
                                     <div class="mb-3">
                                         @if (Route::has('password.request'))
                                             <a class="text-muted float-end" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
+                                                {{ __('Esqueceu sua senha?') }}
                                             </a>
                                         @endif
                                         <label for="password" class="form-label">{{ __('Password') }}</label>
@@ -82,7 +82,7 @@
 
                         <div class="row mt-3">
                             <div class="col-12 text-center">
-                                <p class="text-muted">Don't have an account? <a href="pages-register.html" class="text-muted ms-1"><b>Sign Up</b></a></p>
+                                <p class="text-muted">Não possui uma conta? <a href="{{ route('register') }}" class="text-muted ms-1"><b>Cadastre-se</b></a></p>
                             </div> <!-- end col -->
                         </div>
                         <!-- end row -->
